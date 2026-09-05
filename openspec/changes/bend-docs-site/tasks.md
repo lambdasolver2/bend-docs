@@ -35,6 +35,7 @@
 - [x] 3.16 Professional voice pass: 960px effective column, beginner-first Types and Proofs chapter, process meta-text removed (status lives in badges)
 - [x] 3.17 Expert audit pass: correct Bend2/HVM code labels via aliases, single SITE source of truth, right rail derived from TOC (no drift), astro check clean
 - [x] 3.18 Figure correctness audit: fixed inverted rule-firing pair, rewired commutation result to true port correspondence, connected floating fork join, exact 8:24:32 word bar
+- [x] 3.19 Left rail lists pages only (anchor subsections collapsed into parent pages); subsections remain in right rail + contents page
 
 ## 4. Alchemy deploy (blocked on user credentials)
 
