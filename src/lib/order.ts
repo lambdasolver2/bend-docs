@@ -39,7 +39,7 @@ export const PARTS: Part[] = [
     blurb: "The local graph-rewriting model that makes parallel execution possible without consensus.",
     items: [
       { no: "2.1", title: "Interaction nets", href: "/notes/interaction-nets/" },
-      { no: "2.2", title: "Copying, erasure, and confluence", href: "/notes/interaction-nets/#the-two-theorems-that-carry-everything" },
+      { no: "2.2", title: "Copying, erasure, and confluence", href: "/notes/interaction-nets/#copying-erasure-and-confluence" },
       { no: "2.3", title: "Why coordination is unnecessary", href: "/notes/interaction-nets/#why-coordination-is-unnecessary" },
     ],
   },
