@@ -1,7 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import { neighbors, LEARN_ORDER } from "../../lib/order";
+import { neighbors, LEARN_ORDER, ADVANCED_ORDER } from "../../lib/order";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -37,7 +37,7 @@ const titles = new Map<string, string>([
     l.data.title,
   ] as const),
 ]);
-const nav = neighbors(entry.data.canonical, titles, [LEARN_ORDER]);
+const nav = neighbors(entry.data.canonical, titles, [LEARN_ORDER, ADVANCED_ORDER]);
 const toc = headings.map((heading) => ({
   id: heading.slug,
   text: heading.text,

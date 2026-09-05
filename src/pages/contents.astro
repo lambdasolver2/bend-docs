@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
-import { PARTS as parts } from "../lib/order";
+import { PARTS as parts, ADVANCED_ORDER } from "../lib/order";
 import { CURRICULUM_GROUPS } from "../lib/curriculum";
 
 const notes = await getCollection("notes");
@@ -36,35 +36,46 @@ const tracks: { name: string; path: string[] }[] = [
         </div>
         <p class="part-blurb">{p.blurb}</p>
         <ul>
-          {p.slugs.map((s) => {
+          {p.slugs.map((s, index) => {
             const e = bySlug.get(s);
             const title = e?.data.title ?? (s === "/learn/" ? "Learn by example" : s);
             return (
               <li>
+                <span class="content-no">{p.no}.{index + 1}</span>
                 <a href={s}>{title}</a>
               </li>
             );
           })}
         </ul>
+        {p.no === "05" && <div class="curriculum-under-part">
+          <h3>Language curriculum</h3>
+          <p class="section-intro">Forty-five topics, each with its own address. Pages marked planned are deliberately honest about the current pre-release surface.</p>
+          {CURRICULUM_GROUPS.map((group) => (
+            <section class="curriculum-group">
+              <h4>{group.name}</h4>
+              <ol class="curriculum-list">
+                {group.items.map((item) => (
+                  <li>
+                    <span class="curriculum-no">{item.n}</span>
+                    <a href={item.page}>{item.title}</a>
+                    {item.updated && <time datetime={item.updated}>{item.updated}</time>}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
+          <div class="advanced-under-part">
+            <h3>Advanced runtime and search</h3>
+            <ul>
+              {ADVANCED_ORDER.map((href, index) => (
+                <li><span class="content-no">05.A{index + 1}</span><a href={href}>{bySlug.get(href)?.data.title ?? href}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>}
       </li>
     ))}
   </ol>
-  <h2>Learn by example</h2>
-  <p class="section-intro">Forty-five small topics, each with its own address. Pages marked planned are deliberately honest about the current pre-release surface.</p>
-  {CURRICULUM_GROUPS.map((group) => (
-    <section class="curriculum-group">
-      <h3>{group.name}</h3>
-      <ol class="curriculum-list">
-        {group.items.map((item) => (
-          <li>
-            <span class="curriculum-no">{item.n}</span>
-            <a href={item.page}>{item.title}</a>
-            {item.updated && <time datetime={item.updated}>{item.updated}</time>}
-          </li>
-        ))}
-      </ol>
-    </section>
-  ))}
   <div class="footdiv">
     <ul>
       <li><a class="prevlink" href="/">Home</a></li>

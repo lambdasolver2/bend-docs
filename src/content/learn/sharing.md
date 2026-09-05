@@ -17,7 +17,7 @@ Items 23–26 of the curriculum (22 and 27 have their own pages:
 claim below is verified runnable in [HVM4 hands-on](./hvm-hands-on.md).
 
 <div class="box box-key">
-<b>The one idea.</b> The fork shares nothing (disjoint subgraphs), so it
+<b>The one idea</b> The fork shares nothing (disjoint subgraphs), so it
 is free. Sharing one value between two uses needs explicit duplication —
 and duplicated functions meet superpositions, which is where HVM's power
 lives.

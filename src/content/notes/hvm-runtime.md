@@ -22,7 +22,7 @@ parallel by default, superposition-capable, compiled rather than
 interpreted.
 
 <div class="box box-info">
-<b>Run it yourself.</b> Every claim below with a number next to it was
+<b>Run it yourself</b> Every claim below with a number next to it was
 reproduced by building HVM4 and running the snippet — see
 <a href="/learn/hvm-hands-on/">HVM4 hands-on</a>. The repository carries
 no license text, so treat this as study, not a grant to build on it.

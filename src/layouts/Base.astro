@@ -166,16 +166,28 @@ const url = new URL(canonical, site).href;
         letter-spacing: 0.06em;
         color: #9da5ae;
       }
+      .copy-code {
+        position: absolute; top: 0.45rem; right: 3.8rem; z-index: 1;
+        border: 1px solid #59636e; border-radius: 0; background: #24292e;
+        color: #c9d1d9; cursor: pointer; font: 0.68rem ui-monospace, monospace;
+        padding: 0.2rem 0.45rem;
+      }
+      .copy-code:hover { color: #fff; border-color: #fff; }
+      .copy-code[data-copied="true"] { color: #7ee787; border-color: #7ee787; }
       table { border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; display: block; overflow-x: auto; }
       th, td { text-align: left; vertical-align: top; padding: 0.4rem 1.1rem 0.4rem 0; }
       thead th { border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--ink); }
       .badge { display: inline-block; font-size: 0.8rem; border-radius: 0; padding: 0.15rem 0.7rem; color: #fff; background: var(--accent); margin-bottom: 1rem; }
-      .box { border-radius: 0; padding: 0.9rem 1.1rem; margin: 1.25em 0; border: 1px solid var(--rule); }
+      .box { border: 1px solid var(--ink); border-top-width: 3px; padding: 0.7rem 1rem 0.8rem; margin: 1.5em 0; background: transparent; }
       .box p:first-child { margin-top: 0; }
       .box p:last-child { margin-bottom: 0; }
-      .box-key { border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--paper)); }
-      .box-warn { border-left: 4px solid #b3541e; background: color-mix(in srgb, #b3541e 10%, var(--paper)); }
-      .box-info { border-left: 4px solid var(--muted); background: color-mix(in srgb, #b59a00 14%, var(--paper)); }
+      .box > b:first-child { display: block; font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; font-weight: bold; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 0.45rem; }
+      .box-key { border-top-color: var(--accent); }
+      .box-key > b:first-child { color: var(--accent); }
+      .box-warn { border-top-color: color-mix(in srgb, #b3541e 75%, var(--ink)); }
+      .box-warn > b:first-child { color: color-mix(in srgb, #b3541e 75%, var(--ink)); }
+      .box-info { border-top-color: var(--muted); }
+      .box-info > b:first-child { color: var(--muted); }
       .label { white-space: nowrap; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; padding: 0.1em 0.4em; border-radius: 0; }
       .label-fn { background: #c00; color: #fff; }
       .label-ty { background: #519179; color: #fff; }
@@ -192,6 +204,14 @@ const url = new URL(canonical, site).href;
         font-size: 1.5rem; color: var(--accent); margin-right: 0.4rem;
       }
       .part-blurb { color: var(--muted); font-size: 0.95rem; margin: 0.55rem 0 0.35rem; }
+      .content-no { color: var(--accent); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-variant-numeric: tabular-nums; min-width: 3rem; }
+      .curriculum-under-part { margin-top: 2.5rem; border-top: 2px solid var(--ink); padding-top: 1rem; }
+      .curriculum-under-part > h3 { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 1.15rem; font-style: normal; }
+      .advanced-under-part { margin-top: 2rem; border-top: 1px solid var(--rule); padding-top: 0.75rem; }
+      .advanced-under-part h3 { font-family: Arial, Helvetica, sans-serif; font-size: 1rem; margin: 0.5rem 0; }
+      .advanced-under-part ul { list-style: none; padding: 0; }
+      .advanced-under-part li { display: flex; align-items: baseline; gap: 0.65rem; margin: 0.35rem 0; }
+      .curriculum-group h4 { font-family: Arial, Helvetica, sans-serif; font-size: 1rem; margin: 1.4rem 0 0.25rem; }
       ol.chapters > li > ul { line-height: 1.9; }
       ol.chapters > li > ul > li { list-style-type: none; font-size: 1rem; }
       ol.chapters > li > ul > li > a { color: var(--ink); }
@@ -222,6 +242,7 @@ const url = new URL(canonical, site).href;
       aside.toc ul { list-style: none; margin: 0; padding: 0; }
       aside.toc li { margin: 0; line-height: 1.35; }
       aside.toc li a { display: block; padding: 0.18rem 0; color: var(--muted); text-decoration: none; }
+      aside.toc .nav-no { display: inline-block; min-width: 1.6rem; color: var(--accent); font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; font-variant-numeric: tabular-nums; }
       aside.toc li a:hover { color: var(--link-hover); }
       aside.toc .local-toc { border-top: 1px solid var(--rule); margin-top: 1rem; padding-top: 0.75rem; }
       aside.toc .local-toc li { padding-left: 0.7rem; }
@@ -279,7 +300,7 @@ const url = new URL(canonical, site).href;
               <li>
                 <strong>{group.title}</strong>
                 <ul>
-                  {group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}
+                  {group.items.map((item, index) => <li><a href={item.href}><span class="nav-no">{index + 1}</span>{item.title}</a></li>)}
                 </ul>
               </li>
             ))}
@@ -291,22 +312,22 @@ const url = new URL(canonical, site).href;
           <slot />
         </div>
         <aside class="toc" aria-label="Documentation navigation">
-            <p>Documentation</p>
-            {SITE_NAV.map((section) => (
-              <div class="nav-section">
-                <a href={section.title === "Learn by example" ? "/learn/" : "/contents/"}>{section.title}</a>
-                {section.groups.map((group) => (
-                  <div>
-                    <span class="nav-group-title">{group.title}</span>
-                    <ul>{group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}</ul>
-                  </div>
-                ))}
-              </div>
-            ))}
             {toc && toc.length > 0 && <div class="local-toc">
               <p>On this page</p>
               <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
             </div>}
+            <p>Documentation</p>
+            {SITE_NAV.map((section) => (
+              <div class="nav-section">
+                <a href={section.title === "The languages" ? "/learn/" : "/contents/"}>{section.title}</a>
+                {section.groups.map((group) => (
+                  <div>
+                    <span class="nav-group-title">{group.title}</span>
+                    <ul>{group.items.map((item, index) => <li><a href={item.href}><span class="nav-no">{index + 1}</span>{item.title}</a></li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            ))}
         </aside>
       </div>
     </main>
@@ -318,6 +339,38 @@ const url = new URL(canonical, site).href;
         <button data-mode="board" title="Blackboard (click again for system)">Blackboard</button>
       </div>
       <script is:inline>
+        (() => {
+          const installCopyButtons = () => {
+            document.querySelectorAll("pre.astro-code:not([data-copy-ready])").forEach((pre) => {
+              pre.setAttribute("data-copy-ready", "true");
+              const button = document.createElement("button");
+              button.className = "copy-code";
+              button.type = "button";
+              button.textContent = "Copy";
+              button.setAttribute("aria-label", "Copy code");
+              button.addEventListener("click", async () => {
+                const code = pre.querySelector("code")?.innerText ?? "";
+                try {
+                  await navigator.clipboard.writeText(code);
+                  button.textContent = "Copied";
+                  button.dataset.copied = "true";
+                  setTimeout(() => {
+                    button.textContent = "Copy";
+                    delete button.dataset.copied;
+                  }, 1400);
+                } catch {
+                  button.textContent = "Select";
+                }
+              });
+              pre.append(button);
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", installCopyButtons, { once: true });
+          } else {
+            installCopyButtons();
+          }
+        })();
         (() => {
           const root = document.documentElement;
           const group = document.querySelector(".themes");

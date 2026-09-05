@@ -16,7 +16,7 @@ patterns below come straight from the posted proofs sample; record, map,
 and `bend` shapes are extrapolated or planned.
 
 <div class="box box-warn">
-<b>How to read this page.</b> Constructor patterns (`Z{}`, `S{p}`) and
+<b>How to read this page</b> Constructor patterns (`Z{}`, `S{p}`) and
 numeric patterns (`0`, `1+d`) are posted-sample syntax. Everything else
 is flagged.
 </div>

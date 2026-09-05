@@ -24,7 +24,7 @@ price, and control. Interaction nets (Lafont, POPL 1990) are the machine
 that takes that lesson literally.
 
 <div class="box box-key">
-<b>The big insight: no consensus.</b> Ten thousand workers can rewrite
+<b>The big insight: no consensus</b> Ten thousand workers can rewrite
 one program with zero coordination — no locks, no tags, no collector —
 because the model makes conflicting steps <i>unrepresentable</i>. A step
 touches exactly two adjacent cells, so two steps never share a cell, so
@@ -66,48 +66,103 @@ interleaved cell by cell.
 
 The dual move is annihilation: when a symbol meets itself, both vanish
 and the wires join through — erasure and pairing handled by the same
-geometry. And when a duplication meets a superposition with the same
-label, the two values project out pairwise; with different labels, they
-cross-multiply. Labels are the steering wheel; the engine is always the
-same local meeting.
+geometry. In the drawings below, matching colors mark the same wire
+continued across the step. The richer interaction between duplication and
+alternative values belongs to the advanced runtime chapter; first
+understand the local graph and its mathematical guarantees.
 
 <figure>
-<svg width="420" height="130" viewBox="0 0 420 130" role="img" aria-label="Annihilation: two gamma cells meeting become plain wires">
+<svg width="460" height="190" viewBox="0 0 460 190" role="img" aria-label="Annihilation: two gamma cells meeting become plain wires, blue continues to blue and red to red">
+<text x="85" y="12" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">before</text>
 <g fill="none" stroke="currentColor" stroke-width="1.5">
-<path d="M70 20 L40 70 L100 70 Z"/>
-<circle cx="70" cy="13" r="4" fill="currentColor"/>
-<path d="M70 110 L40 70 L100 70 Z"/>
-<circle cx="70" cy="117" r="4" fill="currentColor"/>
-<line x1="140" y1="65" x2="185" y2="65"/>
-<path d="M176 58 L190 65 L176 72"/>
-<line x1="220" y1="40" x2="220" y2="90"/>
-<line x1="260" y1="40" x2="260" y2="90"/>
+<path d="M85 90 L45 30 L125 30 Z"/>
+<circle cx="85" cy="90" r="4" fill="currentColor"/>
+<line x1="65" y1="30" x2="65" y2="16"/>
+<line x1="105" y1="30" x2="105" y2="16"/>
+<path d="M85 100 L45 160 L125 160 Z"/>
+<circle cx="85" cy="100" r="4" fill="currentColor"/>
+<line x1="65" y1="160" x2="65" y2="174"/>
+<line x1="105" y1="160" x2="105" y2="174"/>
+<line x1="85" y1="90" x2="85" y2="100"/>
 </g>
-<g font-style="italic" font-size="16" fill="currentColor" text-anchor="middle">
-<text x="70" y="55">γ</text>
-<text x="70" y="95">γ</text>
+<g font-size="13" text-anchor="middle">
+<text x="52" y="20" fill="#3b82f6">x₁</text>
+<text x="118" y="20" fill="#ef4444">x₂</text>
+<text x="52" y="188" fill="#3b82f6">y₁</text>
+<text x="118" y="188" fill="#ef4444">y₂</text>
+</g>
+<text x="85" y="62" text-anchor="middle" font-style="italic" font-size="16" fill="currentColor">γ</text>
+<text x="85" y="140" text-anchor="middle" font-style="italic" font-size="16" fill="currentColor">γ</text>
+<g stroke="currentColor" stroke-width="1.5">
+<line x1="160" y1="95" x2="205" y2="95"/>
+<path d="M196 88 L210 95 L196 102" fill="none"/>
+</g>
+<text x="345" y="12" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">after</text>
+<g stroke-width="2.5" fill="none">
+<line x1="300" y1="20" x2="300" y2="170" stroke="#3b82f6"/>
+<line x1="390" y1="20" x2="390" y2="170" stroke="#ef4444"/>
+</g>
+<g font-size="13" text-anchor="middle">
+<text x="300" y="14" fill="#3b82f6">x₁</text>
+<text x="390" y="14" fill="#ef4444">x₂</text>
+<text x="300" y="186" fill="#3b82f6">y₁</text>
+<text x="390" y="186" fill="#ef4444">y₂</text>
 </g>
 </svg>
-<figcaption><span class="label label-fn">annihilate</span> Same meets same: both cells vanish, wires join through.</figcaption>
+<figcaption><span class="label label-fn">annihilate</span> Same meets same: both cells vanish, and each auxiliary wire splices straight through to its counterpart — blue continues to blue, red to red. Nothing is copied, nothing observed.</figcaption>
 </figure>
 
 <figure>
-<svg width="420" height="150" viewBox="0 0 420 150" role="img" aria-label="Commutation: delta passing through gamma copies both, one cell per step">
+<svg width="460" height="225" viewBox="0 0 460 225" role="img" aria-label="Commutation: delta passing through gamma leaves one duplicator on each wire and one gamma copy per side">
+<text x="85" y="12" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">before</text>
 <g fill="none" stroke="currentColor" stroke-width="1.5">
-<circle cx="90" cy="75" r="22"/>
-<circle cx="200" cy="75" r="22"/>
-<line x1="230" y1="75" x2="285" y2="75"/>
-<path d="M276 68 L290 75 L276 82"/>
-<circle cx="320" cy="55" r="16"/>
-<circle cx="320" cy="100" r="16"/>
-<line x1="320" y1="71" x2="320" y2="84"/>
+<path d="M85 75 L50 25 L120 25 Z"/>
+<circle cx="85" cy="75" r="4" fill="currentColor"/>
+<line x1="85" y1="25" x2="85" y2="8"/>
+<path d="M85 95 L50 145 L120 145 Z"/>
+<circle cx="85" cy="95" r="4" fill="currentColor"/>
+<line x1="85" y1="75" x2="85" y2="95"/>
 </g>
-<g font-size="16" fill="currentColor" text-anchor="middle">
-<text x="90" y="81">δ</text>
-<text x="200" y="81" font-style="italic">γ</text>
+<line x1="65" y1="145" x2="65" y2="170" stroke="#3b82f6" stroke-width="2"/>
+<line x1="105" y1="145" x2="105" y2="170" stroke="#ef4444" stroke-width="2"/>
+<g font-size="13" text-anchor="middle">
+<text x="85" y="6" fill="currentColor">v</text>
+<text x="52" y="184" fill="#3b82f6">a</text>
+<text x="118" y="184" fill="#ef4444">b</text>
+</g>
+<text x="85" y="52" text-anchor="middle" font-size="16" fill="currentColor">δ</text>
+<text x="85" y="132" text-anchor="middle" font-style="italic" font-size="16" fill="currentColor">γ</text>
+<g stroke="currentColor" stroke-width="1.5">
+<line x1="150" y1="95" x2="192" y2="95"/>
+<path d="M183 88 L197 95 L183 102" fill="none"/>
+</g>
+<text x="320" y="12" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">after</text>
+<g fill="none" stroke="currentColor" stroke-width="1.5">
+<path d="M250 68 L222 35 L278 35 Z"/>
+<path d="M390 68 L362 35 L418 35 Z"/>
+<path d="M290 170 L270 130 L310 130 Z"/>
+<circle cx="290" cy="170" r="4" fill="currentColor"/>
+<path d="M350 170 L330 130 L370 130 Z"/>
+<circle cx="350" cy="170" r="4" fill="currentColor"/>
+</g>
+<g stroke-width="2" fill="none">
+<line x1="238" y1="68" x2="270" y2="130" stroke="#3b82f6"/>
+<line x1="378" y1="68" x2="310" y2="130" stroke="#3b82f6"/>
+<line x1="262" y1="68" x2="330" y2="130" stroke="#ef4444"/>
+<line x1="402" y1="68" x2="370" y2="130" stroke="#ef4444"/>
+<line x1="290" y1="170" x2="290" y2="200" stroke="#3b82f6"/>
+<line x1="350" y1="170" x2="350" y2="200" stroke="#ef4444"/>
+</g>
+<g font-size="13" text-anchor="middle">
+<text x="250" y="58" font-style="italic" fill="currentColor">γ₁</text>
+<text x="390" y="58" font-style="italic" fill="currentColor">γ₂</text>
+<text x="246" y="160" fill="currentColor">δₐ</text>
+<text x="394" y="160" fill="currentColor">δ_b</text>
+<text x="290" y="214" fill="#3b82f6">a</text>
+<text x="350" y="214" fill="#ef4444">b</text>
 </g>
 </svg>
-<figcaption><span class="label label-ty">commute</span> Distinct symbols pass through each other, copying one cell per step.</figcaption>
+<figcaption><span class="label label-ty">commute</span> Distinct symbols pass through each other: γ is copied once per δ branch and δ once per γ wire. Follow the colors — each original wire (blue <i>a</i>, red <i>b</i>) gets its own duplicator, and each γ copy takes one copy from each.</figcaption>
 </figure>
 
 ## The model in one minute
@@ -140,7 +195,7 @@ ports.
 </figure>
 
 <figure>
-<svg width="420" height="150" viewBox="0 0 420 150" role="img" aria-label="A rule firing: active pair alpha-beta rewrites to net N">
+<svg width="420" height="160" viewBox="0 0 420 160" role="img" aria-label="A rule firing: active pair alpha-beta rewrites to net N">
 <g fill="none" stroke="currentColor" stroke-width="1.5">
 <path d="M70 25 L35 85 L105 85 Z"/>
 <circle cx="70" cy="18" r="4" fill="currentColor"/>
@@ -208,7 +263,7 @@ transparent substitution, trading Lamping-completeness for constant
 factors.
 
 <div class="box box-info">
-<b>The mystery, solved.</b> Taelin's "mystery" post asked why some
+<b>The mystery, solved</b> Taelin's "mystery" post asked why some
 functions run <i>faster the more work you give them</i> — e.g. N repeated
 applications in O(log N). Answer: functions that <b>fuse under
 self-composition</b> (their composed normal form stays constant size) can

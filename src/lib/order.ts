@@ -9,34 +9,29 @@ export interface Part {
 
 export const PARTS: Part[] = [
   {
-    no: "01", title: "The vision",
-    blurb: "Why any of this exists: computability is settled, computation is not.",
-    slugs: ["/notes/optimal-computer/"],
+    no: "01", title: "Introduction",
+    blurb: "What Bend2 is, why the project exists, and where the public record currently stands.",
+    slugs: ["/notes/what-is-bend2/", "/notes/release-status/", "/notes/optimal-computer/"],
   },
   {
     no: "02", title: "Foundations",
-    blurb: "The model of computation underneath everything. Read these first and the rest is vocabulary.",
-    slugs: ["/notes/interaction-nets/", "/notes/four-interactions/"],
+    blurb: "The local graph-rewriting model that makes parallel execution possible without consensus.",
+    slugs: ["/notes/interaction-nets/"],
   },
   {
-    no: "03", title: "The machine",
-    blurb: "The current runtime plus the calculus it implements — including code you can run tonight.",
-    slugs: ["/notes/hvm-runtime/", "/learn/hvm-hands-on/"],
+    no: "03", title: "Parallel execution",
+    blurb: "How ordinary recursive code exposes independent work, and how a device is selected.",
+    slugs: ["/learn/parallelism/", "/learn/gpu/"],
   },
   {
-    no: "04", title: "Search and synthesis",
-    blurb: "Superposition as a search engine: SAT without loops, programs from templates, SupGen's ancestry.",
-    slugs: ["/notes/search-by-superposition/"],
+    no: "04", title: "Types and proofs",
+    blurb: "The proof lineage behind Bend2, and how its proof surface compares with Lean.",
+    slugs: ["/notes/proof-lineage/", "/notes/vs-lean/", "/notes/vs-mojo/"],
   },
   {
     no: "05", title: "The languages",
-    blurb: "The proof lineage behind Bend2's types, and the two rivals that define it by contrast.",
-    slugs: ["/notes/proof-lineage/", "/notes/vs-mojo/", "/notes/vs-lean/"],
-  },
-  {
-    no: "06", title: "Bend2 today",
-    blurb: "What the unreleased successor is, and the dated trail of when it might arrive.",
-    slugs: ["/notes/what-is-bend2/", "/notes/release-status/"],
+    blurb: "The complete Bend2 language curriculum, followed by the advanced runtime and search material.",
+    slugs: ["/learn/"],
   },
 ];
 
@@ -53,6 +48,14 @@ export const LEARN_ORDER: string[] = [
   "/learn/proofs/",
   "/learn/synthesis/",
   "/learn/effects-targets/",
+];
+
+export const ADVANCED_ORDER: string[] = [
+  "/notes/hvm-runtime/",
+  "/notes/four-interactions/",
+  "/learn/hvm-hands-on/",
+  "/learn/sharing/",
+  "/notes/search-by-superposition/",
 ];
 
 export interface NavEntry {

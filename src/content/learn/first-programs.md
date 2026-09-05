@@ -17,7 +17,7 @@ the shapes below are extrapolated from the four posted Bend2 samples
 will be corrected against the compiler at release.
 
 <div class="box box-warn">
-<b>How to read this page.</b> Constructs matching the posted samples are
+<b>How to read this page</b> Constructs matching the posted samples are
 shown plainly. Anything the samples never demonstrate is flagged
 <i>extrapolated</i>. Nothing here has been compiled — no public compiler
 exists.

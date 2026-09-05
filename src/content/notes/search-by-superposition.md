@@ -20,7 +20,7 @@ domain and you get a superposition of its entire image — with the
 evaluator sharing work across all guesses at once.
 
 <div class="box box-warn">
-<b>Status.</b> The experiments below ran on earlier HVM syntax and are
+<b>Status</b> The experiments below ran on earlier HVM syntax and are
 <strong>documentation-only</strong> here: shapes and numbers as reported
 by Taelin, not re-run. The mechanism (first-class SUP + collapse) is
 unchanged in HVM4.

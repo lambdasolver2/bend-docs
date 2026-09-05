@@ -55,7 +55,7 @@ proofs, and `*` as the type of types. No tactic language, no standard
 library ceremony: just enough theory to state and check precise types.
 
 <div class="box box-key">
-<b>Kind2's conversion checker in three lines.</b> To decide <i>A == B</i>:
+<b>Kind2's conversion checker in three lines</b> To decide <i>A == B</i>:
 if textually identical, true; else reduce both to weak normal form and
 check similarity field-by-field. No "seen equations" map (Kind1's slower
 fix), no constructor flags — just identical → reduce → similar, in

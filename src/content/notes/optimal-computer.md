@@ -18,7 +18,7 @@ notes — read it before anything else if you want the motive, not just
 the mechanism.
 
 <div class="box box-key">
-<b>The one claim.</b> Turing machines and the λ-calculus are equivalent in
+<b>The one claim</b> Turing machines and the λ-calculus are equivalent in
 <i>computability</i> — but a model can be inherently less efficient than
 another. Church–Turing says nothing about <i>computation</i>.
 </div>
@@ -66,7 +66,7 @@ fundamental at all, and some alien civilization does mathematics and
 computing entirely in annihilation and commutation.
 
 <div class="box box-info">
-<b>Where this goes.</b> The atomic-step claim becomes the
+<b>Where this goes</b> The atomic-step claim becomes the
 <a href="/notes/interaction-nets/">interaction-net model</a>; the
 efficiency claim becomes the <a href="/notes/four-interactions/">four
 interactions</a>; the company built <a href="/notes/hvm-runtime/">four

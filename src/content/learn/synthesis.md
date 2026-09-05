@@ -16,7 +16,7 @@ private; everything below is the public shape of the idea, not its
 interface.
 
 <div class="box box-key">
-<b>The one idea.</b> Precise types give synthesis a search target and the
+<b>The one idea</b> Precise types give synthesis a search target and the
 checker an acceptance condition. SupGen proposes implementations;
 the type checker disposes. See
 <a href="/notes/search-by-superposition/">search by superposition</a>
