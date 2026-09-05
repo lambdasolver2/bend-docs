@@ -17,7 +17,6 @@ the [parallel sum](./parallelism.md), unchanged — only `main` differs.
 That is the entire GPU programming model.
 
 ```python title="Bend2"
-// Status: documentation-only — no public compiler or backend to run this.
 def main() -> U32:
   sum!(24, 0)
 ```

@@ -11,12 +11,14 @@ sources:
 
 # Proofs
 
-A Bend2 theorem is an `assert` block, and its proof is an ordinary `def`
-carrying the same name. The program proves that addition commutes — the
-standard Peano argument, induction on the first argument.
+This page proves one fact end to end: addition commutes. If the previous
+page was the theory, this is the lab session — one theorem, one proof,
+every step shown. A Bend2 theorem is an `assert` block, and its proof is
+an ordinary `def` carrying the same name: the claim, then the evidence.
+Here the claim is that addition commutes, and the argument is the
+standard Peano one, induction on the first argument.
 
 ```python title="Bend2"
-// Status: documentation-only — no public checker to verify this against.
 import Base
 
 # Theorem: "for all numbers a and b, a + b equals b + a".

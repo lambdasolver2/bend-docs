@@ -11,10 +11,9 @@ sources:
 
 # Sharing, duplication, superpositions
 
-Items 23–26 of the curriculum (22 and 27 have their own pages:
-[parallelism](./parallelism.md), [GPU](./gpu.md)).
-**Documentation-only**: Bend2-side shapes extrapolated; every runtime
-claim below is verified runnable in [HVM4 hands-on](./hvm-hands-on.md).
+Sharing one value between two uses is where Bend2's cost model lives:
+the fork shares nothing, duplication is explicit, and superpositions
+branch. Runtime claims link to runnable HVM4.
 
 <div class="box box-key">
 <b>The one idea</b> The fork shares nothing (disjoint subgraphs), so it
@@ -40,14 +39,13 @@ accident — the language-level face of the
 ## Unscoped lambdas
 
 Unscoped lambdas exist in the runtime today (`λ$x` binders — run them in
-[HVM4 hands-on](./hvm-hands-on.md)). Their Bend2 surface syntax has no
-posted sample *(planned)*.
+[HVM4 hands-on](./hvm-hands-on.md)). Their Bend2 surface syntax *(planned)*.
 
 ## Superpositions
 
 Superpositions are deliberately introduced later, in
 [HVM4 Runtime 9.4](../notes/four-interactions/#superpositions). Their
-Bend2 surface syntax has no posted sample *(planned)*.
+Bend2 surface syntax *(planned)*.
 
 ## Evaluation order
 

@@ -115,9 +115,9 @@ const url = new URL(canonical, site).href;
         line-height: 1.65;
         -webkit-font-smoothing: antialiased;
       }
-      main, footer { max-width: min(1060px, 94vw); margin-inline: auto; }
+      main, footer { max-width: min(1480px, 96vw); margin-inline: auto; }
       main { padding-block: 1.5rem 2rem; }
-      .running-head { max-width: min(1060px, 94vw); margin-inline: auto; padding-top: 0.5rem; }
+      .running-head { max-width: min(1480px, 96vw); margin-inline: auto; padding-top: 0.5rem; }
       .rh-inner {
         border-bottom: 1px solid var(--ink);
         display: flex; justify-content: space-between; align-items: baseline;
@@ -243,7 +243,7 @@ const url = new URL(canonical, site).href;
       .prereq p:first-child { font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-bottom: 0.5rem; }
       .prereq ul { list-style-type: disc; }
       .prereq ul li::marker { color: var(--link); }
-      .doc-layout { display: grid; grid-template-columns: 220px minmax(0, 880px) 220px; gap: 2rem; justify-content: center; align-items: start; }
+      .doc-layout { display: grid; grid-template-columns: 220px minmax(0, 960px) 220px; gap: 2rem; justify-content: center; align-items: start; }
       .doc-main { min-width: 0; width: 100%; }
       .toc-rail { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.82rem; padding: 0 0.75rem 1rem; overscroll-behavior: contain; }
       .global-toc { border-right: 1px solid var(--rule); padding-left: 0; }
@@ -258,8 +258,8 @@ const url = new URL(canonical, site).href;
       .page-toc li { padding-left: 0.7rem; }
       .mobile-doc-nav, .mobile-page-nav { display: none; }
       @media (max-width: 1024px) {
-        .doc-layout { grid-template-columns: minmax(0, 880px) 220px; }
-        .doc-main { max-width: 880px; margin-inline: auto; }
+        .doc-layout { grid-template-columns: minmax(0, 960px) 220px; }
+        .doc-main { max-width: 960px; margin-inline: auto; }
         .global-toc { display: none; }
         .page-toc { display: block; }
         .mobile-doc-nav { display: block; border-block: 1px solid var(--rule); margin: 0 0 1.5rem; }
@@ -348,12 +348,12 @@ const url = new URL(canonical, site).href;
         <div class="doc-main">
           <slot />
         </div>
+        {toc && toc.length > 0 && (
         <aside class="toc-rail page-toc" data-rail="page" aria-label="On this page">
           <p>On this page</p>
-          {toc && toc.length > 0
-            ? <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
-            : <p class="meta">This page has no subsections.</p>}
+          <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
         </aside>
+        )}
       </div>
     </main>
     <footer>

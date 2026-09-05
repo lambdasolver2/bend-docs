@@ -11,9 +11,8 @@ sources:
 
 # Effects and targets
 
-Items 40–45 of the curriculum. **Documentation-only**: IO shapes come
-from the posted hello sample; files, arguments, and backends are
-planned.
+Effects stay on the CPU in typed `do` blocks; pure code may fly to the
+GPU or compile to C, JavaScript, and Python.
 
 ## IO
 

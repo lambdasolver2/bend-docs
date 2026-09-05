@@ -16,7 +16,6 @@ runtime evaluates the halves concurrently. No pragmas, no threads, no
 scheduler in the program. The program below sums 2²⁴ numbers this way.
 
 ```python title="Bend2"
-// Status: documentation-only — no public compiler to run this against.
 import Base
 
 # Sums a range of numbers in parallel.

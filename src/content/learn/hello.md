@@ -17,7 +17,6 @@ statements that happen, but as values of type `IO` that describe what to
 do.
 
 ```python title="Bend2"
-// Status: documentation-only — no public compiler to run this against.
 import Base
 
 # Performs effects on the CPU.

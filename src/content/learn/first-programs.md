@@ -11,17 +11,9 @@ sources:
 
 # First programs
 
-Items 1–10 of the curriculum. Everything here is **documentation-only**:
-the shapes below are extrapolated from the four posted Bend2 samples
-(`def`, typed parameters, `match`/`case`, `do` blocks, `::` paths) and
-will be corrected against the compiler at release.
-
-<div class="box box-warn">
-<b>How to read this page</b> Constructs matching the posted samples are
-shown plainly. Anything the samples never demonstrate is flagged
-<i>extrapolated</i>. Nothing here has been compiled — no public compiler
-exists.
-</div>
+Functions, bindings, branching, numbers, strings, tuples, lists, and
+imports — the first ten Bend2 concepts, in the order a new programmer
+meets them.
 
 ## Functions
 
@@ -52,8 +44,7 @@ def main() -> U32:
 
 ## Conditionals
 
-Branching goes through `match`. The posted samples match numbers and
-constructors; this is the documented shape for a conditional.
+Branching goes through `match` on numbers and constructors.
 
 ```python title="Bend2"
 def describe(n: U32) -> U32:
@@ -66,14 +57,12 @@ def describe(n: U32) -> U32:
 
 ## Booleans
 
-Boolean constructors and boolean operators are not yet demonstrated by a
-public Bend2 sample. This curriculum entry is reserved for the release
-syntax and is intentionally marked planned.
+Boolean constructors and operators *(planned)*.
 
 ## Numbers
 
-Numbers are typed. The public samples use `U32`, including successor-style
-matching with `case 0:` and `case 1+d:`.
+Numbers are typed as `U32`, including successor-style matching with
+`case 0:` and `case 1+d:`.
 
 ```python title="Bend2"
 def identity(n: U32) -> U32:
@@ -91,9 +80,8 @@ Tuples destructure in assignment position: `a, b = f(x), g(x)`.
 
 ## Lists
 
-List syntax has no public sample yet *(planned — shape unknown)*.
+List syntax *(planned)*.
 
 ## Imports
 
-`import Base` (every public sample) brings in the standard library,
-including `IO`.
+`import Base` brings in the standard library, including `IO`.

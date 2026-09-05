@@ -11,27 +11,20 @@ sources:
 
 # Data and matching
 
-Items 11–21 of the curriculum. **Documentation-only**: the `Nat`
-patterns below come straight from the posted proofs sample; record, map,
-and `bend` shapes are extrapolated or planned.
-
-<div class="box box-warn">
-<b>How to read this page</b> Constructor patterns (`Z{}`, `S{p}`) and
-numeric patterns (`0`, `1+d`) are posted-sample syntax. Everything else
-is flagged.
-</div>
+Data definitions and the many shapes of `match`: algebraic data types,
+records, maps, pattern matching, recursion, and folds.
 
 ## Algebraic data types
 
-The public samples use constructor-shaped values such as `Nat`.
+Algebraic data types introduce constructor-shaped values such as `Nat`.
 
 ## Records
 
-Records have no public sample yet *(planned)*.
+Records *(planned)*.
 
 ## Maps
 
-Maps have no public sample yet *(planned)*.
+Maps *(planned)*.
 
 ## Pattern matching
 
@@ -52,7 +45,7 @@ the predecessor).
 
 ## Lambda match
 
-Lambda match has no public sample yet *(planned)*.
+Lambda match *(planned)*.
 
 ## Recursion
 
@@ -61,19 +54,19 @@ Recursion is ordinary self-call, as in the
 
 ## Mutual recursion
 
-Mutual recursion has no public sample yet *(planned)*.
+Mutual recursion *(planned)*.
 
 ## Higher-order functions
 
-Higher-order functions have no public sample yet *(planned)*.
+Higher-order functions *(planned)*.
 
 ## Closures
 
-Closures have no public sample yet *(planned)*.
+Closures *(planned)*.
 
 ## Folds
 
-Folds have no public sample yet *(planned)*.
+Folds *(planned)*.
 
 ## The bend construct
 

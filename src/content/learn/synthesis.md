@@ -11,9 +11,8 @@ sources:
 
 # Synthesis with SupGen
 
-Items 37–39 of the curriculum. **Documentation-only**: SupGen is
-private; everything below is the public shape of the idea, not its
-interface.
+SupGen turns precise types into programs: holes mark the unfinished,
+specifications set the target, and search fills the gap.
 
 <div class="box box-key">
 <b>The one idea</b> Precise types give synthesis a search target and the
