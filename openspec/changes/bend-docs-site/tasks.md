@@ -31,6 +31,7 @@
 - [x] 3.13 Editorial callout restyle (hairline box, top accent rule, small-caps label, no tint) + color-coded annihilation/commutation figures with wire correspondence
 - [x] 3.14 Approved Lean-style 1–10 TOC: decimal section addresses, deferred superposition material, group-only right rail, restored rail scroll position, and code-copy controls
 - [x] 3.15 Independent per-rail scroll memory, dead markup removal, and one-address-per-curriculum-item splits
+- [x] 3.16 Professional voice pass: 960px effective column, beginner-first Types and Proofs chapter, process meta-text removed (status lives in badges)
 
 ## 4. Alchemy deploy (blocked on user credentials)
 
