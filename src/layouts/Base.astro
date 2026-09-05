@@ -486,6 +486,82 @@ const url = new URL(canonical, site).href;
           });
         })();
         (() => {
+          // Client-side active-link sync: the server can only mark bare page
+          // links, so anchor entries (2.2, 2.3, …) and direct # visits need
+          // this. Hash clicks update immediately; scrolling updates via spy.
+          const SEL = '.toc-rail a[href], .mobile-doc-nav a[href], .mobile-page-nav a[href]';
+          const norm = (p) => (p.split("#")[0].replace(/\/+$/, "") || "/");
+          const hrefPath = (h) => {
+            const before = h.split("#")[0];
+            return before ? norm(before) : norm(location.pathname);
+          };
+          const markNone = () => {
+            document.querySelectorAll(`${SEL}[aria-current="page"]`).forEach((a) => {
+              a.removeAttribute("aria-current");
+            });
+          };
+          const syncFromLocation = () => {
+            const hash = location.hash;
+            const path = norm(location.pathname);
+            markNone();
+            if (hash) {
+              let hit = false;
+              document.querySelectorAll(SEL).forEach((a) => {
+                const h = a.getAttribute("href");
+                if (h && h.endsWith(hash) && hrefPath(h) === path) {
+                  a.setAttribute("aria-current", "page");
+                  hit = true;
+                }
+              });
+              if (hit) return;
+            }
+            document.querySelectorAll(SEL).forEach((a) => {
+              const h = a.getAttribute("href");
+              if (h && !h.includes("#") && norm(h) === path) {
+                a.setAttribute("aria-current", "page");
+              }
+            });
+          };
+          const markBarePage = () => {
+            const path = norm(location.pathname);
+            document.querySelectorAll(SEL).forEach((a) => {
+              const h = a.getAttribute("href");
+              if (h && !h.includes("#") && norm(h) === path) {
+                a.setAttribute("aria-current", "page");
+              }
+            });
+          };
+          addEventListener("hashchange", syncFromLocation);
+          syncFromLocation();
+          if ("IntersectionObserver" in window) {
+            let current = null;
+            const applyId = (id) => {
+              if (id === current) return;
+              current = id;
+              const path = norm(location.pathname);
+              const needle = `#${id}`;
+              markNone();
+              let hit = false;
+              document.querySelectorAll(SEL).forEach((a) => {
+                const h = a.getAttribute("href");
+                if (h && h.endsWith(needle) && hrefPath(h) === path) {
+                  a.setAttribute("aria-current", "page");
+                  hit = true;
+                }
+              });
+              if (!hit) markBarePage();
+            };
+            const io = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) applyId(entry.target.id);
+              });
+            }, { rootMargin: "-15% 0px -70% 0px" });
+            document.querySelectorAll(".doc-main h2[id], .doc-main h3[id]").forEach((h) => {
+              io.observe(h);
+            });
+          }
+        })();
+        (() => {
           const root = document.documentElement;
           const group = document.querySelector(".themes");
           const buttons = group.querySelectorAll("button");

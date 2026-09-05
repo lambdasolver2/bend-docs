@@ -113,7 +113,7 @@ understand the local graph and its mathematical guarantees.
 </figure>
 
 <figure>
-<svg width="460" height="225" viewBox="0 0 460 225" role="img" aria-label="Commutation: delta passing through gamma leaves one duplicator on each wire and one gamma copy per side">
+<svg width="460" height="230" viewBox="0 0 460 230" role="img" aria-label="Commutation: delta passing through gamma leaves one duplicator on each wire and one gamma copy per side">
 <text x="85" y="12" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">before</text>
 <g fill="none" stroke="currentColor" stroke-width="1.5">
 <path d="M85 75 L50 25 L120 25 Z"/>
@@ -138,28 +138,30 @@ understand the local graph and its mathematical guarantees.
 </g>
 <text x="320" y="12" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.6">after</text>
 <g fill="none" stroke="currentColor" stroke-width="1.5">
-<path d="M250 68 L222 35 L278 35 Z"/>
-<path d="M390 68 L362 35 L418 35 Z"/>
-<path d="M290 170 L270 130 L310 130 Z"/>
-<circle cx="290" cy="170" r="4" fill="currentColor"/>
-<path d="M350 170 L330 130 L370 130 Z"/>
-<circle cx="350" cy="170" r="4" fill="currentColor"/>
+<path d="M255 30 L225 62 L285 62 Z"/>
+<circle cx="255" cy="30" r="4" fill="currentColor"/>
+<path d="M395 30 L365 62 L425 62 Z"/>
+<circle cx="395" cy="30" r="4" fill="currentColor"/>
+<path d="M305 170 L285 135 L325 135 Z"/>
+<circle cx="305" cy="170" r="4" fill="currentColor"/>
+<path d="M365 185 L345 150 L385 150 Z"/>
+<circle cx="365" cy="185" r="4" fill="currentColor"/>
 </g>
 <g stroke-width="2" fill="none">
-<line x1="238" y1="68" x2="270" y2="130" stroke="#3b82f6"/>
-<line x1="378" y1="68" x2="310" y2="130" stroke="#3b82f6"/>
-<line x1="262" y1="68" x2="330" y2="130" stroke="#ef4444"/>
-<line x1="402" y1="68" x2="370" y2="130" stroke="#ef4444"/>
-<line x1="290" y1="170" x2="290" y2="200" stroke="#3b82f6"/>
-<line x1="350" y1="170" x2="350" y2="200" stroke="#ef4444"/>
+<line x1="225" y1="62" x2="285" y2="135" stroke="#3b82f6"/>
+<line x1="365" y1="62" x2="325" y2="135" stroke="#3b82f6"/>
+<line x1="285" y1="62" x2="345" y2="150" stroke="#ef4444"/>
+<line x1="425" y1="62" x2="385" y2="150" stroke="#ef4444"/>
+<line x1="305" y1="170" x2="305" y2="200" stroke="#3b82f6"/>
+<line x1="365" y1="185" x2="365" y2="208" stroke="#ef4444"/>
 </g>
 <g font-size="13" text-anchor="middle">
-<text x="250" y="58" font-style="italic" fill="currentColor">γ₁</text>
-<text x="390" y="58" font-style="italic" fill="currentColor">γ₂</text>
-<text x="246" y="160" fill="currentColor">δₐ</text>
-<text x="394" y="160" fill="currentColor">δ_b</text>
-<text x="290" y="214" fill="#3b82f6">a</text>
-<text x="350" y="214" fill="#ef4444">b</text>
+<text x="255" y="55" font-style="italic" fill="currentColor">γ₁</text>
+<text x="395" y="55" font-style="italic" fill="currentColor">γ₂</text>
+<text x="262" y="158" fill="currentColor">δₐ</text>
+<text x="407" y="172" fill="currentColor">δ_b</text>
+<text x="305" y="214" fill="#3b82f6">a</text>
+<text x="365" y="222" fill="#ef4444">b</text>
 </g>
 </svg>
 <figcaption><span class="label label-ty">commute</span> Distinct symbols pass through each other: γ is copied once per δ branch and δ once per γ wire. Follow the colors — each original wire (blue <i>a</i>, red <i>b</i>) gets its own duplicator, and each γ copy takes one copy from each.</figcaption>
@@ -197,17 +199,18 @@ ports.
 <figure>
 <svg width="420" height="160" viewBox="0 0 420 160" role="img" aria-label="A rule firing: active pair alpha-beta rewrites to net N">
 <g fill="none" stroke="currentColor" stroke-width="1.5">
-<path d="M70 25 L35 85 L105 85 Z"/>
-<circle cx="70" cy="18" r="4" fill="currentColor"/>
-<path d="M70 145 L35 85 L105 85 Z"/>
-<circle cx="70" cy="152" r="4" fill="currentColor"/>
+<path d="M70 70 L36 22 L104 22 Z"/>
+<path d="M70 100 L36 148 L104 148 Z"/>
+<line x1="70" y1="78" x2="70" y2="92"/>
+<circle cx="70" cy="78" r="4" fill="currentColor"/>
+<circle cx="70" cy="92" r="4" fill="currentColor"/>
 <line x1="130" y1="85" x2="190" y2="85"/>
 <path d="M178 77 L192 85 L178 93"/>
 <rect x="210" y="45" width="170" height="80" rx="10"/>
 </g>
 <g font-style="italic" font-size="16" fill="currentColor" text-anchor="middle">
-<text x="70" y="70">α</text>
-<text x="70" y="115">β</text>
+<text x="70" y="48">α</text>
+<text x="70" y="124">β</text>
 <text x="295" y="92">N</text>
 </g>
 </svg>
