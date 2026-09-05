@@ -239,25 +239,27 @@ const url = new URL(canonical, site).href;
       .prereq p:first-child { font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-bottom: 0.5rem; }
       .prereq ul { list-style-type: disc; }
       .prereq ul li::marker { color: var(--link); }
-      .doc-layout { display: grid; grid-template-columns: minmax(0, 760px) 250px; gap: 3rem; justify-content: center; align-items: start; }
+      .doc-layout { display: grid; grid-template-columns: 220px minmax(0, 760px) 220px; gap: 2rem; justify-content: center; align-items: start; }
       .doc-main { min-width: 0; width: 100%; }
-      aside.toc { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.82rem; border-left: 1px solid var(--rule); padding: 0 0.75rem 1rem 1rem; }
-      aside.toc p { font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.65rem; color: var(--muted); }
-      aside.toc .nav-section { margin: 0 0 1.2rem; }
-      aside.toc .nav-section > a, aside.toc .nav-group-title { display: block; font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: var(--ink); margin: 0.65rem 0 0.25rem; text-decoration: none; }
-      aside.toc ul { list-style: none; margin: 0; padding: 0; }
-      aside.toc li { margin: 0; line-height: 1.35; }
-      aside.toc li a { display: block; padding: 0.18rem 0; color: var(--muted); text-decoration: none; }
-      aside.toc .nav-no { display: inline-block; min-width: 1.6rem; color: var(--accent); font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; font-variant-numeric: tabular-nums; }
-      aside.toc li a:hover { color: var(--link-hover); }
-      aside.toc .local-toc { border-top: 1px solid var(--rule); margin-top: 1rem; padding-top: 0.75rem; }
-      aside.toc .local-toc li { padding-left: 0.7rem; }
-      .mobile-doc-nav { display: none; }
+      .toc-rail { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.82rem; padding: 0 0.75rem 1rem; overscroll-behavior: contain; }
+      .global-toc { border-right: 1px solid var(--rule); padding-left: 0; }
+      .page-toc { border-left: 1px solid var(--rule); padding-right: 0; }
+      .toc-rail p { font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.65rem; color: var(--muted); }
+      .toc-rail .nav-section { margin: 0 0 1.2rem; }
+      .toc-rail .nav-section > a, .toc-rail .nav-group-title { display: block; font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: var(--ink); margin: 0.65rem 0 0.25rem; text-decoration: none; }
+      .toc-rail ul { list-style: none; margin: 0; padding: 0; }
+      .toc-rail li { margin: 0; line-height: 1.35; }
+      .toc-rail li a { display: block; padding: 0.18rem 0; color: var(--muted); text-decoration: none; }
+      .toc-rail li a:hover { color: var(--link-hover); }
+      .page-toc li { padding-left: 0.7rem; }
+      .mobile-doc-nav, .mobile-page-nav { display: none; }
       @media (max-width: 1024px) {
-        .doc-layout { display: block; }
+        .doc-layout { grid-template-columns: minmax(0, 760px) 220px; }
         .doc-main { max-width: 760px; margin-inline: auto; }
-        aside.toc { display: none; }
+        .global-toc { display: none; }
+        .page-toc { display: block; }
         .mobile-doc-nav { display: block; border-block: 1px solid var(--rule); margin: 0 0 1.5rem; }
+        .mobile-page-nav { display: none; }
         .mobile-doc-nav summary { cursor: pointer; padding: 0.65rem 0; font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; }
         .mobile-doc-nav > ul { list-style: none; padding: 0 0 0.8rem; margin: 0; columns: 2; column-gap: 1.5rem; }
         .mobile-doc-nav > ul > li { break-inside: avoid; margin: 0.3rem 0 0.8rem; }
@@ -270,7 +272,14 @@ const url = new URL(canonical, site).href;
         main, footer { max-width: none; width: 100%; padding-inline: 1rem; }
         .running-head { max-width: none; padding-inline: 1rem; }
         h1 { font-size: 2.2rem; }
-        .mobile-doc-nav ul { columns: 1; }
+        .doc-layout { display: block; }
+        .page-toc { display: none; }
+        .mobile-page-nav { display: block; border-bottom: 1px solid var(--rule); margin: -0.5rem 0 1rem; }
+        .mobile-page-nav summary { cursor: pointer; padding: 0.65rem 0; font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; }
+        .mobile-page-nav ul { list-style: none; padding: 0 0 0.75rem; margin: 0; }
+        .mobile-page-nav li { margin: 0.3rem 0; }
+        .mobile-page-nav a { color: var(--muted); text-decoration: none; }
+        .mobile-doc-nav > ul { columns: 1; }
         .footdiv ul, .footdiv ul li { display: block; width: 100%; }
         .footdiv ul li { margin: 0.4rem 0; text-align: left !important; }
       }
@@ -313,15 +322,15 @@ const url = new URL(canonical, site).href;
           </ul>
         ))}
       </details>
+      {toc && toc.length > 0 && <details class="mobile-page-nav">
+        <summary>On this page</summary>
+        <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
+      </details>}
       <div class="doc-layout">
         <div class="doc-main">
           <slot />
         </div>
-        <aside class="toc" aria-label="Documentation navigation">
-            {toc && toc.length > 0 && <div class="local-toc">
-              <p>On this page</p>
-              <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
-            </div>}
+        <aside class="toc-rail global-toc" data-rail="documentation" aria-label="Documentation navigation">
             <p>Documentation</p>
             {SITE_NAV.map((section) => (
               <div class="nav-section">
@@ -334,6 +343,12 @@ const url = new URL(canonical, site).href;
                 ))}
               </div>
             ))}
+        </aside>
+        <aside class="toc-rail page-toc" data-rail="page" aria-label="On this page">
+          <p>On this page</p>
+          {toc && toc.length > 0
+            ? <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
+            : <p class="meta">This page has no subsections.</p>}
         </aside>
       </div>
     </main>
@@ -378,22 +393,33 @@ const url = new URL(canonical, site).href;
           }
         })();
         (() => {
-          const rail = document.querySelector(".toc");
-          if (!rail) return;
-          const key = "bend-docs:right-rail-scroll";
-          const save = () => {
-            try { sessionStorage.setItem(key, String(rail.scrollTop)); } catch { /* storage unavailable */ }
-          };
-          const restore = () => {
-            try {
-              const saved = Number(sessionStorage.getItem(key));
-              if (Number.isFinite(saved)) rail.scrollTop = saved;
-            } catch { /* storage unavailable */ }
-          };
-          rail.addEventListener("scroll", save, { passive: true });
-          rail.addEventListener("click", save);
-          addEventListener("pagehide", save, { once: true });
-          requestAnimationFrame(restore);
+          document.querySelectorAll(".toc-rail[data-rail]").forEach((rail) => {
+            const key = `bend-docs:rail-scroll:${rail.getAttribute("data-rail")}:v3`;
+            const save = () => {
+              try { localStorage.setItem(key, String(rail.scrollTop)); } catch { /* storage unavailable */ }
+            };
+            const restore = () => {
+              try {
+                const saved = Number(localStorage.getItem(key));
+                if (Number.isFinite(saved)) rail.scrollTop = saved;
+              } catch { /* storage unavailable */ }
+            };
+            let frame;
+            rail.addEventListener("scroll", () => {
+              cancelAnimationFrame(frame);
+              frame = requestAnimationFrame(save);
+            }, { passive: true });
+            rail.addEventListener("click", save);
+            addEventListener("pagehide", save);
+            addEventListener("pageshow", () => {
+              restore();
+              requestAnimationFrame(() => requestAnimationFrame(restore));
+              setTimeout(restore, 100);
+            });
+            restore();
+            requestAnimationFrame(() => requestAnimationFrame(restore));
+            setTimeout(restore, 100);
+          });
         })();
         (() => {
           const root = document.documentElement;

@@ -67,3 +67,94 @@ rule — attacking exactly the constant factor that lets a tuned CPU core
 rival GPU throughput on many workloads. The AOT compiler was one of three
 items on the March 2026 launch-blocker list, alongside the GPU runtime
 (since resolved) and SupGen integration (still private).
+
+## 9.1 Runtime model
+
+An HVM program is a **book** of named terms. A definition such as
+`@main = ...` is a reusable static term. Evaluation instantiates the term
+into a mutable graph, then repeatedly finds an active pair: two principal
+ports connected together.
+
+Each interaction consumes a small local configuration and replaces it with
+another configuration. The evaluator does not walk the entire program to
+decide what is safe to run. Locality and confluence make that decision
+independent for every active pair.
+
+```sh
+clang -O2 -o hvm src/hvm.c
+./hvm file.hvm -s       # interaction statistics
+./hvm file.hvm -s -C10  # collapse alternatives
+./hvm file.hvm -D       # print intermediate steps
+```
+
+## 9.2 Surface syntax
+
+The runtime language is deliberately smaller than Bend2. Definitions use
+`@name = term`; application uses parentheses, not whitespace application:
+`@add(1, 2)`, not `@add 1 2`.
+
+```haskell
+@add = λa. λb. (a + b)
+@main = @add(1, 2)
+//3
+```
+
+| Form | Meaning |
+|---|---|
+| `λx. body` | Lambda abstraction |
+| `(f x)` or `f(x)` | Application |
+| `#Pair{a,b}` | Constructor |
+| `λ{#Pair: ...}` | Constructor match |
+| `!x&A = value; body` | Explicit duplication with label `A` |
+| `&A{left,right}` | Superposition with label `A` |
+| `x₀`, `x₁` | The two branches of a duplicated value |
+| `&{}` | Erasure |
+| `@name` | Book reference |
+
+Variables are affine: an ordinary variable may be used at most once. When
+the same value must be used twice, write a cloned binder (`λ&x`) or an
+explicit duplication. This is what lets the evaluator represent copying
+as graph interaction rather than a global memory operation.
+
+## 9.3 The 64-bit term
+
+Every term is represented by one 64-bit word:
+
+```text
++--------+------------------------+--------------------------------+
+| TAG 8  | EXT 24                 | VAL 32                        |
++--------+------------------------+--------------------------------+
+```
+
+`TAG` identifies the term kind. `EXT` carries metadata such as an
+operation code, constructor identity, duplication label, or binder level.
+`VAL` contains an immediate number or an index into the heap/book.
+
+Dynamic terms live in the mutable heap; static definitions live in the
+immutable book. ALO allocation terms bridge them: a static term expands
+into a dynamic term only when evaluation forces that layer, preserving
+compact definitions and sharing.
+
+## 9.4 Evaluation and collapse
+
+HVM distinguishes the amount of a term it evaluates:
+
+- **WNF** — weak normal form; expose the head shape.
+- **SNF** — strong normal form; reduce the whole term while preserving
+  superpositions and duplication nodes.
+- **CNF** — collapsed normal form; enumerate ordinary readable results.
+
+Collapsing is a presentation step, not the same thing as evaluation. A
+superposition is not automatically a list, and collapsing it too early can
+destroy the sharing that made the computation cheap.
+
+## 9.5 GPU boundary
+
+HVM4 has Metal and CUDA backends. The GPU does not change the interaction
+rules; it changes where independent graph work is scheduled. Bend2 keeps
+input/output on the host and sends pure computation to a device call marked
+with `!`.
+
+Read next: [The four interactions](./four-interactions/),
+[HVM4 hands-on](../learn/hvm-hands-on/), and
+[Search by superposition](./search-by-superposition/).
