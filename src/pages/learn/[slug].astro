@@ -1,0 +1,63 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { neighbors } from "../../lib/order";
+
+export async function getStaticPaths() {
+  const learn = await getCollection("learn");
+  return learn.map((l) => ({
+    params: { slug: l.id.replace(/\.md$/, "") },
+    props: { entry: l },
+  }));
+}
+
+interface Props { entry: CollectionEntry<"learn">; }
+const { entry } = Astro.props;
+const slug = entry.id.replace(/\.md$/, "");
+const { Content } = await render(entry);
+const mirror = `/learn/${slug}/index.md`;
+const badge =
+  entry.data.status === "runnable"
+    ? "background:#1d7a46;border-color:#1d7a46"
+    : entry.data.status === "docs-only"
+      ? "background:#b3541e;border-color:#b3541e"
+      : entry.data.status === "prerelease"
+        ? "background:#6b4fa0;border-color:#6b4fa0"
+        : "";
+const titles = new Map<string, string>([
+  ["/", "Home"],
+  ["/contents/", "Contents"],
+  ...(await getCollection("notes")).map((n) => [
+    `/notes/${n.id.replace(/\.md$/, "")}/`,
+    n.data.title,
+  ] as const),
+  ...(await getCollection("learn")).map((l) => [
+    `/learn/${l.id.replace(/\.md$/, "")}/`,
+    l.data.title,
+  ] as const),
+]);
+const nav = neighbors(entry.data.canonical, titles);
+---
+
+<Base
+  title={entry.data.title}
+  description={entry.data.description}
+  canonical={entry.data.canonical}
+  mdMirror={mirror}
+>
+  <p class="badge" style={badge}>status: {entry.data.status}</p>
+  <Content />
+  <hr />
+  <p class="meta">
+    Source updated {entry.data.updated} · verified {entry.data.verified} ·
+    canonical <a href={entry.data.canonical}>{entry.data.canonical}</a> ·
+    <a href={mirror}>markdown</a>
+  </p>
+  <div class="footdiv">
+    <ul>
+      <li>{nav.prev && <a class="prevlink" href={nav.prev.href}>{nav.prev.title}</a>}</li>
+      <li><a href="/contents/">Contents</a></li>
+      <li>{nav.next && <a class="nxtlink" href={nav.next.href}>{nav.next.title}</a>}</li>
+    </ul>
+  </div>
+</Base>

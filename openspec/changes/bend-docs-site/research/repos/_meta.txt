@@ -1,0 +1,9 @@
+VictorTaelin/Bend2 :: Bend2 - WIP | stars: 14 | pushed: 2025-06-17T20:28:27Z | license: none
+VictorTaelin/Interaction-Calculus :: A programming language and model of computation that matches the optimal λ-calculus reduction algorithm perfectly. | stars: 948 | pushed: 2025-11-13T16:25:27Z | license: none
+VictorTaelin/hvm4-formal :: None | stars: 9 | pushed: 2025-11-06T18:04:43Z | license: none
+HigherOrderCO/Bend :: A massively parallel, high-level programming language | stars: 19817 | pushed: 2026-07-07T19:51:01Z | license: Apache-2.0
+HigherOrderCO/HVM4 :: None | stars: 119 | pushed: 2026-05-30T02:43:04Z | license: none
+HigherOrderCO/Kind :: A modern proof language | stars: 3765 | pushed: 2025-01-22T16:54:12Z | license: MIT
+HigherOrderCO/HVM1 :: A massively parallel, optimal functional runtime in Rust | stars: 38 | pushed: 2024-08-07T17:35:16Z | license: MIT
+HigherOrderCO/HVM2 :: A massively parallel, optimal functional runtime in Rust | stars: 11342 | pushed: 2024-11-21T14:33:04Z | license: Apache-2.0
+HigherOrderCO/HVM3 :: HVM3 | stars: 301 | pushed: 2026-01-29T12:35:48Z | license: MIT

@@ -1,0 +1,95 @@
+---
+import Base from "../../layouts/Base.astro";
+
+interface Item { n: number; title: string; href?: string }
+interface Group { name: string; items: Item[] }
+
+const L = (slug: string) => `/learn/${slug}/`;
+const groups: Group[] = [
+  { name: "First programs", items: [
+    { n: 1, title: "Hello world", href: L("hello") },
+    { n: 2, title: "Functions", href: L("first-programs") },
+    { n: 3, title: "Let bindings", href: L("first-programs") },
+    { n: 4, title: "Conditionals", href: L("first-programs") },
+    { n: 5, title: "Booleans", href: L("first-programs") },
+    { n: 6, title: "Numbers", href: L("first-programs") },
+    { n: 7, title: "Strings and characters", href: L("first-programs") },
+    { n: 8, title: "Tuples", href: L("first-programs") },
+    { n: 9, title: "Lists", href: L("first-programs") },
+    { n: 10, title: "Imports", href: L("first-programs") },
+  ]},
+  { name: "Data and matching", items: [
+    { n: 11, title: "Algebraic data types", href: L("data-matching") },
+    { n: 12, title: "Records", href: L("data-matching") },
+    { n: 13, title: "Maps", href: L("data-matching") },
+    { n: 14, title: "Pattern matching", href: L("data-matching") },
+    { n: 15, title: "Lambda match", href: L("data-matching") },
+    { n: 16, title: "Recursion", href: L("data-matching") },
+    { n: 17, title: "Mutual recursion", href: L("data-matching") },
+    { n: 18, title: "Higher-order functions", href: L("data-matching") },
+    { n: 19, title: "Closures", href: L("data-matching") },
+    { n: 20, title: "Folds", href: L("data-matching") },
+    { n: 21, title: "The bend construct", href: L("data-matching") },
+  ]},
+  { name: "Parallelism", items: [
+    { n: 22, title: "Automatic parallelism", href: L("parallelism") },
+    { n: 23, title: "Sharing and duplication", href: L("sharing") },
+    { n: 24, title: "Unscoped lambdas", href: L("sharing") },
+    { n: 25, title: "Superpositions", href: L("sharing") },
+    { n: 26, title: "Evaluation order", href: L("sharing") },
+    { n: 27, title: "Running on GPUs", href: L("gpu") },
+    { n: 28, title: "Measuring speedup", href: L("sharing") },
+  ]},
+  { name: "Types and proofs", items: [
+    { n: 29, title: "Type annotations", href: L("types-proofs") },
+    { n: 30, title: "Polymorphism", href: L("types-proofs") },
+    { n: 31, title: "Dependent types, first contact", href: L("types-proofs") },
+    { n: 32, title: "Sized lists", href: L("types-proofs") },
+    { n: 33, title: "Equality", href: L("types-proofs") },
+    { n: 34, title: "Proofs", href: L("proofs") },
+    { n: 35, title: "Induction", href: L("types-proofs") },
+    { n: 36, title: "Totality", href: L("types-proofs") },
+  ]},
+  { name: "Synthesis", items: [
+    { n: 37, title: "Holes", href: L("synthesis") },
+    { n: 38, title: "Types as specifications", href: L("synthesis") },
+    { n: 39, title: "SupGen", href: L("synthesis") },
+  ]},
+  { name: "Effects and targets", items: [
+    { n: 40, title: "IO", href: L("effects-targets") },
+    { n: 41, title: "Files", href: L("effects-targets") },
+    { n: 42, title: "Command-line arguments", href: L("effects-targets") },
+    { n: 43, title: "Compiling to C", href: L("effects-targets") },
+    { n: 44, title: "Compiling to JavaScript", href: L("effects-targets") },
+    { n: 45, title: "Compiling to Python", href: L("effects-targets") },
+  ]},
+];
+---
+
+<Base
+  title="Learn by example"
+  description="The 45-item Bend2 curriculum: first programs, data, parallelism, proofs, synthesis, effects. New Bend2 syntax throughout, HVM4 runnable today."
+  canonical="/learn/"
+  mdMirror="/learn/index.md"
+>
+  <h1>Learn by example</h1>
+  <div class="box box-warn">
+    <b>Status.</b> Bend2 has no public compiler, so its samples are
+    documentation-only in new Bend2 syntax — extrapolated shapes are
+    flagged on each page. The
+    <a href="/learn/hvm-hands-on/">HVM4 hands-on</a> page runs today,
+    outputs verified.
+  </div>
+  {groups.map((g) => (
+    <section>
+      <h2>{g.name}</h2>
+      <ol>
+        {g.items.map((it) => (
+          <li value={it.n}>
+            {it.href ? <a href={it.href}>{it.title}</a> : it.title}
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+</Base>

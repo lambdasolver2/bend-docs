@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+
+const notes = (await getCollection("notes")).length;
+const learn = (await getCollection("learn")).length;
+---
+
+<Base
+  title="Bend Documentation"
+  description="Concept-first documentation for HVM4 and Bend2: the main idea first, then depth."
+  canonical="/"
+  mdMirror="/index.md"
+>
+  <h1>Bend Documentation</h1>
+  <p>
+    Ordinary functional code already contains all the parallelism a machine
+    could want. This documentation explains the runtime idea that makes it
+    runnable (interaction nets), the machine built on it (HVM4), and Bend2 —
+    the unreleased language combining automatic parallelism, dependent
+    types, and synthesis. Main concept first, depth after. {notes} notes,
+    {learn} hands-on pages, zero JavaScript required to read any of them.
+  </p>
+  <h2>Start here, by appetite</h2>
+  <ul>
+    <li>
+      <strong>Run code tonight</strong> — build HVM4 and watch one location
+      hold two values:{" "}
+      <a href="/learn/hvm-hands-on/">HVM4 hands-on</a>{" "}
+      (runnable, outputs verified).
+    </li>
+    <li>
+      <strong>Understand the machine</strong> — how ten thousand workers
+      rewrite one program without coordinating:{" "}
+      <a href="/notes/interaction-nets/">Interaction nets, explained</a>.
+    </li>
+    <li>
+      <strong>Follow Bend2</strong> — what it is and whether it's out:{" "}
+      <a href="/notes/what-is-bend2/">What is Bend2?</a> ·{" "}
+      <a href="/notes/release-status/">Release status</a> (currently: no).
+    </li>
+  </ul>
+  <p>
+    Full reading order with tracks: <a href="/contents/">Contents</a>
+    {" "}· machine-readable mirrors: <a href="/llms.txt">llms.txt</a>.
+  </p>
+  <div class="footdiv">
+    <ul>
+      <li></li>
+      <li><a href="/contents/">Contents</a></li>
+      <li><a class="nxtlink" href="/contents/">Contents</a></li>
+    </ul>
+  </div>
+  <p class="meta">Unofficial Bend documentation. Not affiliated with Higher Order Company.</p>
+</Base>

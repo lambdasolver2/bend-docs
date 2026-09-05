@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bend-docs.example.com/sitemap.xml

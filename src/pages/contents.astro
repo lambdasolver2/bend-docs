@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import { PARTS as parts } from "../lib/order";
+
+const notes = await getCollection("notes");
+const learn = await getCollection("learn");
+const bySlug = new Map(
+  [...notes.map((n) => [`/notes/${n.id.replace(/\.md$/, "")}/`, n] as const),
+   ...learn.map((l) => [`/learn/${l.id.replace(/\.md$/, "")}/`, l] as const)],
+);
+
+const tracks: { name: string; path: string[] }[] = [
+  { name: "Run code tonight", path: ["/learn/hvm-hands-on/", "/notes/four-interactions/", "/notes/hvm-runtime/"] },
+  { name: "Understand the machine", path: ["/notes/optimal-computer/", "/notes/interaction-nets/", "/notes/four-interactions/", "/notes/hvm-runtime/"] },
+  { name: "Follow Bend2", path: ["/notes/what-is-bend2/", "/notes/search-by-superposition/", "/notes/release-status/", "/notes/vs-mojo/", "/notes/vs-lean/", "/learn/proofs/"] },
+];
+---
+
+<Base
+  title="Contents"
+  description="Every page on this site in reading order, with three curated tracks, descriptions, and verification dates."
+  canonical="/contents/"
+  mdMirror="/contents/index.md"
+>
+  <h1>Contents</h1>
+  <h2>Tracks</h2>
+  <ul>
+    {tracks.map((t) => (
+      <li>
+        <strong>{t.name}:</strong>{" "}
+        {t.path.map((s, i) => (
+          <span>{i > 0 && " → "}<a href={s}>{bySlug.get(s)?.data.title ?? s}</a></span>
+        ))}
+      </li>
+    ))}
+  </ul>
+  <h2>Chapters</h2>
+  <ol class="chapters">
+    {parts.map((p) => (
+      <li>
+        <span class="part">{p.no}. {p.title}</span>
+        <span class="meta"> — {p.blurb}</span>
+        <ul>
+          {p.slugs.map((s) => {
+            const e = bySlug.get(s);
+            if (!e) return null;
+            return (
+              <li>
+                <a href={s}>{e.data.title}</a>
+                <span class="meta"> — {e.data.description}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </li>
+    ))}
+  </ol>
+  <div class="footdiv">
+    <ul>
+      <li><a class="prevlink" href="/">Home</a></li>
+      <li><a href="/contents/">Contents</a></li>
+      <li><a class="nxtlink" href="/notes/optimal-computer/">Towards an optimal computer</a></li>
+    </ul>
+  </div>
+</Base>
