@@ -11,6 +11,15 @@ sources:
 
 # Bend2 vs Mojo
 
+<div class="prereq">
+
+**Prerequisites**
+
+- [Automatic parallelism](/learn/parallelism/) — the fork both sides argue about
+- [Running on GPUs](/learn/gpu/) — what `!` means before comparing it to kernels
+
+</div>
+
 Both want high-level GPU code. They assign the scheduling job to opposite
 actors: in Mojo, **you** schedule; in Bend2, **the evaluator** does.
 

@@ -39,16 +39,21 @@ const tracks: { name: string; path: string[] }[] = [
   <ol class="chapters">
     {parts.map((p) => (
       <li>
-        <span class="part">{p.no}. {p.title}</span>
+        <span class="part"><span class="part-no">{p.no}</span> {p.title}</span>
         <span class="meta"> — {p.blurb}</span>
         <ul>
           {p.slugs.map((s) => {
             const e = bySlug.get(s);
-            if (!e) return null;
+            const title = e?.data.title ?? (s === "/learn/" ? "Learn by example" : s);
+            const desc =
+              e?.data.description ??
+              (s === "/learn/"
+                ? "The 45-item curriculum in new Bend2 syntax, plus the HVM page that runs today."
+                : "");
             return (
               <li>
-                <a href={s}>{e.data.title}</a>
-                <span class="meta"> — {e.data.description}</span>
+                <a href={s}>{title}</a>
+                <span class="meta"> — {desc}</span>
               </li>
             );
           })}

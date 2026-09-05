@@ -14,6 +14,7 @@
 - [x] 2.8 Bend2-by-Example curriculum (45 items, 6 groups): new-syntax pages per group, extrapolated constructs flagged, planned items stubbed honestly
 - [x] 3.8 De-brand + rebrand pass: no Bend1/old-HVM/study-notes anywhere in dist, Bend Documentation identity, LYAH chapters ToC, Lean mirror-proof section
 - [x] 3.9 Square professional theme (zero border-radius) + sticky right-side section nav with build-extracted anchors, all links verified resolving
+- [x] 3.10 OCaml-style IV pages (prerequisites boxes, Lean goal transcript, remarks) + drop VI section (chain via curriculum order), numbered parts
 - [x] 2.2 Generate per-page Markdown mirrors, llms.txt, sitemap, robots, and verify mirrors match HTML content and llms.txt lists them
 
 ## 3. Astro site scaffold

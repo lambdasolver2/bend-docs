@@ -39,10 +39,25 @@ export const PARTS: Part[] = [
     slugs: ["/notes/what-is-bend2/", "/notes/release-status/"],
   },
   {
-    no: "VI", title: "By example",
+    no: "VI", title: "Learn by example",
     blurb: "The 45-item curriculum in new Bend2 syntax, plus the HVM page that runs today.",
-    slugs: ["/learn/hello/", "/learn/first-programs/", "/learn/data-matching/", "/learn/parallelism/", "/learn/sharing/", "/learn/gpu/", "/learn/types-proofs/", "/learn/proofs/", "/learn/synthesis/", "/learn/effects-targets/"],
+    slugs: ["/learn/"],
   },
+];
+
+// Curriculum order for the learn detail pages (kept chained for prev/next
+// even though chapters only list the /learn/ index).
+export const LEARN_ORDER: string[] = [
+  "/learn/hello/",
+  "/learn/first-programs/",
+  "/learn/data-matching/",
+  "/learn/parallelism/",
+  "/learn/sharing/",
+  "/learn/gpu/",
+  "/learn/types-proofs/",
+  "/learn/proofs/",
+  "/learn/synthesis/",
+  "/learn/effects-targets/",
 ];
 
 export interface NavEntry {
@@ -60,12 +75,17 @@ export const ORDER: string[] = [
 export function neighbors(
   href: string,
   titles: Map<string, string>,
+  extraChains: string[][] = [],
 ): { prev?: NavEntry; next?: NavEntry } {
-  const i = ORDER.indexOf(href);
-  if (i < 0) return {};
-  const get = (h: string): NavEntry => ({ href: h, title: titles.get(h) ?? h });
-  return {
-    ...(i > 0 ? { prev: get(ORDER[i - 1]) } : {}),
-    ...(i < ORDER.length - 1 ? { next: get(ORDER[i + 1]) } : {}),
-  };
+  const chains = [ORDER, ...extraChains];
+  for (const chain of chains) {
+    const i = chain.indexOf(href);
+    if (i < 0) continue;
+    const get = (h: string): NavEntry => ({ href: h, title: titles.get(h) ?? h });
+    return {
+      ...(i > 0 ? { prev: get(chain[i - 1]) } : {}),
+      ...(i < chain.length - 1 ? { next: get(chain[i + 1]) } : {}),
+    };
+  }
+  return {};
 }

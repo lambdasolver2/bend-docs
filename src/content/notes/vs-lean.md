@@ -12,6 +12,15 @@ sources:
 
 # Bend2 vs Lean
 
+<div class="prereq">
+
+**Prerequisites**
+
+- [Proofs](/learn/proofs/) — the `add_comm` sample both sides prove
+- [Where the proofs come from](./proof-lineage/) — Formality, Kind, and the productivity thesis
+
+</div>
+
 Both live on the propositions-as-types side of Curry–Howard: a
 specification is a type, a proof is a program, checking is type checking.
 What differs is which side pays the bills.
@@ -68,6 +77,29 @@ search language exists because, in Bend2's story, the machine
 (SupGen) performs the search and the human reads the trace. Which side of
 that trade pays off — tactic scripts over a giant library, or
 machine-found term proofs over precise types — is the open bet.
+
+Watch it run in the infoview, goal by goal — input and output in one
+transcript, OCaml-toplevel style:
+
+```
+⊢ a + b = b + a
+-- induction a with
+-- ├─ case zero,  ⊢ 0 + b = b + 0
+-- │    rw [Nat.zero_add]   →  ⊢ b = b + 0
+-- │    rw [Nat.add_zero]   →  no goals
+-- └─ case succ,  ⊢ (n + 1) + b = b + (n + 1)
+--      rw [Nat.succ_add]   →  ⊢ (n + b) + 1 = b + (n + 1)
+--      rw [Nat.add_succ]   →  ⊢ (n + b) + 1 = (b + n) + 1
+--      rw [ih]             →  no goals
+```
+
+A couple of remarks:
+
+- Every rewrite names a lemma that must already exist — in mathlib, or
+  proved just above. Bend2's `%` lines work the same way over `Base`.
+- The `ih` in the last step *is* the induction hypothesis, exactly where
+  Bend2 puts the recursive call `%add_comm(p, b)`. Same proof, two
+  costumes: search script vs. found term.
 
 ## The default today
 

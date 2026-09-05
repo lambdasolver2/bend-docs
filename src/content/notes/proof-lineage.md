@@ -14,6 +14,14 @@ sources:
 
 # Where the proofs come from
 
+<div class="prereq">
+
+**Prerequisites**
+
+- [What is Bend2?](./what-is-bend2/) — the language this lineage leads to
+
+</div>
+
 Bend2's dependent types did not appear from nowhere. They are the third
 generation of one author's argument: **proofs are a developer-productivity
 tool**, an evolution of types the way TypeScript was an evolution of
