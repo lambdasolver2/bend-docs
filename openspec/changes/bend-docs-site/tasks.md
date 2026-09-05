@@ -37,7 +37,6 @@
 - [x] 4.1 Add alchemy.run.ts with Cloudflare.Website.Astro static assets-only config plus deploy docs, and verify `alchemy plan` succeeds without credentials committed
 - [x] 4.25 User runs `alchemy login` (OAuth or API token) and confirms profile works; verify `alchemy profile show` redacts secrets — REQUIRES USER ACTION
 - [x] 4.4 Publish source to GitHub lambdasolver2/bend-docs (secret-scanned, gitignored deps/dist/state) — DONE 2026-09-05
-- [ ] 4.3 Deploy to workers.dev, confirm cache + speculation-rules headers, enable Speed Brain, and verify header check from spec passes
 
 ## 5. OpenSpec long-term record
 

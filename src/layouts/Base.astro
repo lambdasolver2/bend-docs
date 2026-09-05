@@ -157,22 +157,26 @@ const url = new URL(canonical, site).href;
         tab-size: 2;
         line-height: 1.55;
       }
+      .codewrap { position: relative; margin: 1.5em 0; }
+      .codewrap > pre.astro-code { margin: 0; }
       pre.astro-code:not([data-language="plaintext"])::after {
         content: attr(data-language);
         position: absolute;
         top: 0.45rem;
-        right: 0.7rem;
+        left: 0.9rem;
         font-size: 0.68rem;
         letter-spacing: 0.06em;
         color: #9da5ae;
       }
       .copy-code {
-        position: absolute; top: 0.45rem; right: 3.8rem; z-index: 1;
+        position: absolute; top: 0.45rem; right: 0.6rem; z-index: 1;
+        min-width: 3.6rem; text-align: center;
         border: 1px solid #59636e; border-radius: 0; background: #24292e;
         color: #c9d1d9; cursor: pointer; font: 0.68rem ui-monospace, monospace;
         padding: 0.2rem 0.45rem;
       }
       .copy-code:hover { color: #fff; border-color: #fff; }
+      .copy-code:focus-visible { outline: 2px solid #8ab4ff; outline-offset: 1px; }
       .copy-code[data-copied="true"] { color: #7ee787; border-color: #7ee787; }
       table { border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; display: block; overflow-x: auto; }
       th, td { text-align: left; vertical-align: top; padding: 0.4rem 1.1rem 0.4rem 0; }
@@ -239,7 +243,7 @@ const url = new URL(canonical, site).href;
       .prereq p:first-child { font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-bottom: 0.5rem; }
       .prereq ul { list-style-type: disc; }
       .prereq ul li::marker { color: var(--link); }
-      .doc-layout { display: grid; grid-template-columns: 220px minmax(0, 760px) 220px; gap: 2rem; justify-content: center; align-items: start; }
+      .doc-layout { display: grid; grid-template-columns: 220px minmax(0, 880px) 220px; gap: 2rem; justify-content: center; align-items: start; }
       .doc-main { min-width: 0; width: 100%; }
       .toc-rail { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.82rem; padding: 0 0.75rem 1rem; overscroll-behavior: contain; }
       .global-toc { border-right: 1px solid var(--rule); padding-left: 0; }
@@ -254,8 +258,8 @@ const url = new URL(canonical, site).href;
       .page-toc li { padding-left: 0.7rem; }
       .mobile-doc-nav, .mobile-page-nav { display: none; }
       @media (max-width: 1024px) {
-        .doc-layout { grid-template-columns: minmax(0, 760px) 220px; }
-        .doc-main { max-width: 760px; margin-inline: auto; }
+        .doc-layout { grid-template-columns: minmax(0, 880px) 220px; }
+        .doc-main { max-width: 880px; margin-inline: auto; }
         .global-toc { display: none; }
         .page-toc { display: block; }
         .mobile-doc-nav { display: block; border-block: 1px solid var(--rule); margin: 0 0 1.5rem; }
@@ -295,7 +299,7 @@ const url = new URL(canonical, site).href;
         color: var(--ink); border: 1px solid var(--ink); padding: 0.25rem 0.6rem;
       }
       .themes button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-      @media print { :root { --paper: #fff; --ink: #000; --muted: #333; --link: #000; } .themes, .footdiv { display: none; } }
+      @media print { :root { --paper: #fff; --ink: #000; --muted: #333; --link: #000; } .themes, .footdiv, .copy-code { display: none; } }
     </style>
 
   </head>
@@ -364,26 +368,44 @@ const url = new URL(canonical, site).href;
           const installCopyButtons = () => {
             document.querySelectorAll("pre.astro-code:not([data-copy-ready])").forEach((pre) => {
               pre.setAttribute("data-copy-ready", "true");
+              const wrap = document.createElement("div");
+              wrap.className = "codewrap";
+              pre.replaceWith(wrap);
+              wrap.append(pre);
               const button = document.createElement("button");
               button.className = "copy-code";
               button.type = "button";
               button.textContent = "Copy";
               button.setAttribute("aria-label", "Copy code");
+              button.setAttribute("aria-live", "polite");
+              let resetTimer;
+              const done = (label) => {
+                button.textContent = label;
+                button.dataset.copied = "true";
+                clearTimeout(resetTimer);
+                resetTimer = setTimeout(() => {
+                  button.textContent = "Copy";
+                  delete button.dataset.copied;
+                }, 1400);
+              };
               button.addEventListener("click", async () => {
-                const code = pre.querySelector("code")?.innerText ?? "";
+                const codeEl = pre.querySelector("code");
+                const code = codeEl?.innerText ?? "";
                 try {
                   await navigator.clipboard.writeText(code);
-                  button.textContent = "Copied";
-                  button.dataset.copied = "true";
-                  setTimeout(() => {
-                    button.textContent = "Copy";
-                    delete button.dataset.copied;
-                  }, 1400);
+                  done("Copied");
                 } catch {
-                  button.textContent = "Select";
+                  if (codeEl) {
+                    const range = document.createRange();
+                    range.selectNodeContents(codeEl);
+                    const sel = getSelection();
+                    sel?.removeAllRanges();
+                    sel?.addRange(range);
+                  }
+                  done("Selected");
                 }
               });
-              pre.append(button);
+              wrap.append(button);
             });
           };
           if (document.readyState === "loading") {
