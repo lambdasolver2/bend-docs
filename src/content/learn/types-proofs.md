@@ -25,7 +25,7 @@ Every posted `def` annotates parameters and results (`a: U32`,
 Polymorphism — functions generic over types — has no posted sample
 *(planned)*.
 
-## Dependent types, first contact
+## Dependent types
 
 Types can mention values: the proofs sample quantifies `for all a : Nat`
 and states equality `{add(a, b) = add(b, a) : Nat}` as a type. Sized

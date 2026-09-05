@@ -25,7 +25,7 @@ exists.
 
 ## Functions
 
-```bend2
+```python title="Bend2"
 import Base
 
 # Adds two numbers.
@@ -44,7 +44,7 @@ the arrow, and the body is an expression — no `return`.
 Tuple assignment splits two calls at once (the fork from
 [parallelism](./parallelism.md)). A single binding is the same shape:
 
-```bend2
+```python title="Bend2"
 def main() -> U32:
   x = 40 + 2
   x
@@ -55,7 +55,7 @@ def main() -> U32:
 Branching goes through `match`. The posted samples match numbers and
 constructors; this is the documented shape for a conditional.
 
-```bend2
+```python title="Bend2"
 def describe(n: U32) -> U32:
   match n:
     case 0:
@@ -75,7 +75,7 @@ syntax and is intentionally marked planned.
 Numbers are typed. The public samples use `U32`, including successor-style
 matching with `case 0:` and `case 1+d:`.
 
-```bend2
+```python title="Bend2"
 def identity(n: U32) -> U32:
   n
 ```

@@ -15,15 +15,29 @@ Items 40–45 of the curriculum. **Documentation-only**: IO shapes come
 from the posted hello sample; files, arguments, and backends are
 planned.
 
-## IO and files
+## IO
 
 Effects run on the CPU in typed `do` blocks ([hello](./hello.md)) —
-`input`, `print`, sequenced with `<-`. Files and command-line arguments
-extend the same `IO` surface *(planned)*.
+`input`, `print`, sequenced with `<-`.
 
-## Compiling to C, JavaScript, Python
+## Files
 
-HVM4's ahead-of-time compiler targets native C; Bend2 additionally names
-JavaScript and Python backends. Flags, outputs, and the GPU story per
-target arrive with the toolchain *(planned)* — the one hard rule is
-already known: pure code may fly to the GPU, effects stay on the host.
+Files extend the same `IO` surface *(planned)*.
+
+## Command-line arguments
+
+Command-line arguments extend the same `IO` surface *(planned)*.
+
+## Compiling to C
+
+HVM4's ahead-of-time compiler targets native C *(current runtime tooling)*.
+
+## Compiling to JavaScript
+
+Bend2's JavaScript target is planned.
+
+## Compiling to Python
+
+Bend2's Python target is planned. Flags, outputs, and the GPU story per
+target arrive with the toolchain — the one hard rule is already known:
+pure code may fly to the GPU, effects stay on the host.

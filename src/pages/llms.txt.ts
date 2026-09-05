@@ -18,7 +18,7 @@ export async function GET() {
       (n) => `- [${n.data.title}](${SITE}/notes/${n.id.replace(/\.md$/, '')}/index.md): ${n.data.description} (status: ${n.data.status})`,
     ),
     "",
-    "## Learn by example",
+    "## Bend2 curriculum",
     "",
     ...learn.map(
       (l) => `- [${l.data.title}](${SITE}/learn/${l.id.replace(/\.md$/, '')}/index.md): ${l.data.description} (status: ${l.data.status})`,

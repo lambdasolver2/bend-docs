@@ -15,7 +15,7 @@ Bend2 parallelizes ordinary recursion: split the work in two, and the
 runtime evaluates the halves concurrently. No pragmas, no threads, no
 scheduler in the program. The program below sums 2²⁴ numbers this way.
 
-```bend2
+```python title="Bend2"
 // Status: documentation-only — no public compiler to run this against.
 import Base
 

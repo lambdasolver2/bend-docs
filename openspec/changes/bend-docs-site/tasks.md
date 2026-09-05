@@ -29,6 +29,7 @@
 - [x] 3.11 Rebuild contents as a professional documentation index: centered responsive reading layout, permanent desktop documentation rail, mobile contents disclosure, six numbered chapters, and all 45 curriculum items with resolving URLs
 - [x] 3.12 Remove Python tooling from the repository; replace research fetch utility with Node ESM and verify no `*.py` files remain
 - [x] 3.13 Editorial callout restyle (hairline box, top accent rule, small-caps label, no tint) + color-coded annihilation/commutation figures with wire correspondence
+- [x] 3.14 Approved Lean-style 1–10 TOC: decimal section addresses, deferred superposition material, group-only right rail, restored rail scroll position, and code-copy controls
 
 ## 4. Alchemy deploy (blocked on user credentials)
 

@@ -38,7 +38,7 @@ Maps have no public sample yet *(planned)*.
 The proofs sample matches `Nat` by constructors — brace-suffixed
 patterns, one arm per constructor:
 
-```bend2
+```python title="Bend2"
 def is_zero(n: Nat) -> Bool:
   match n:
     case Z{}:

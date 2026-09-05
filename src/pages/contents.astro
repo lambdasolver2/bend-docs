@@ -1,86 +1,42 @@
 ---
-import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
-import { PARTS as parts, ADVANCED_ORDER } from "../lib/order";
-import { CURRICULUM_GROUPS } from "../lib/curriculum";
-
-const notes = await getCollection("notes");
-const learn = await getCollection("learn");
-const bySlug = new Map(
-  [...notes.map((n) => [`/notes/${n.id.replace(/\.md$/, "")}/`, n] as const),
-   ...learn.map((l) => [`/learn/${l.id.replace(/\.md$/, "")}/`, l] as const)],
-);
-
-const tracks: { name: string; path: string[] }[] = [
-  { name: "Run code tonight", path: ["/learn/hvm-hands-on/", "/notes/four-interactions/", "/notes/hvm-runtime/"] },
-  { name: "Understand the machine", path: ["/notes/optimal-computer/", "/notes/interaction-nets/", "/notes/four-interactions/", "/notes/hvm-runtime/"] },
-  { name: "Follow Bend2", path: ["/notes/what-is-bend2/", "/notes/search-by-superposition/", "/notes/release-status/", "/notes/vs-mojo/", "/notes/vs-lean/", "/learn/proofs/"] },
-];
+import { PARTS as parts } from "../lib/order";
 ---
 
 <Base
   title="Contents"
-  description="Every page on this site in reading order, with three curated tracks, descriptions, and verification dates."
+  description="The Bend documentation reference: ten chapters covering the language, proofs, parallel execution, HVM4, and comparisons."
   canonical="/contents/"
   mdMirror="/contents/index.md"
 >
-  <h1>Contents</h1>
-  <p class="lede">A guided route through the ideas, the runtime, the language, and the curriculum.</p>
-  <h2>Documentation</h2>
-  <ol class="chapters">
-    {parts.map((p) => (
-      <li>
+  <h1>Table of Contents</h1>
+  <p class="lede">A structured reference for learning Bend2 and understanding the HVM4 runtime.</p>
+
+  <nav class="reference-toc" aria-label="Documentation table of contents">
+    {parts.map((part) => (
+      <section class="reference-chapter">
         <div class="part-heading">
-          <span class="part-no">{p.no}</span>
-          <h3>{p.title}</h3>
+          <span class="part-no">{part.no}</span>
+          <h2>{part.title}</h2>
         </div>
-        <p class="part-blurb">{p.blurb}</p>
-        <ul>
-          {p.slugs.map((s, index) => {
-            const e = bySlug.get(s);
-            const title = e?.data.title ?? (s === "/learn/" ? "Learn by example" : s);
-            return (
-              <li>
-                <span class="content-no">{p.no}.{index + 1}</span>
-                <a href={s}>{title}</a>
-              </li>
-            );
-          })}
-        </ul>
-        {p.no === "05" && <div class="curriculum-under-part">
-          <h3>Language curriculum</h3>
-          <p class="section-intro">Forty-five topics, each with its own address. Pages marked planned are deliberately honest about the current pre-release surface.</p>
-          {CURRICULUM_GROUPS.map((group) => (
-            <section class="curriculum-group">
-              <h4>{group.name}</h4>
-              <ol class="curriculum-list">
-                {group.items.map((item) => (
-                  <li>
-                    <span class="curriculum-no">{item.n}</span>
-                    <a href={item.page}>{item.title}</a>
-                    {item.updated && <time datetime={item.updated}>{item.updated}</time>}
-                  </li>
-                ))}
-              </ol>
-            </section>
+        <p class="part-blurb">{part.blurb}</p>
+        <ol>
+          {part.items.map((item) => (
+            <li>
+              <span class="content-no">{item.no}</span>
+              <a href={item.href}>{item.title}</a>
+            </li>
           ))}
-          <div class="advanced-under-part">
-            <h3>Advanced runtime and search</h3>
-            <ul>
-              {ADVANCED_ORDER.map((href, index) => (
-                <li><span class="content-no">05.A{index + 1}</span><a href={href}>{bySlug.get(href)?.data.title ?? href}</a></li>
-              ))}
-            </ul>
-          </div>
-        </div>}
-      </li>
+        </ol>
+      </section>
     ))}
-  </ol>
+  </nav>
+
   <div class="footdiv">
     <ul>
       <li><a class="prevlink" href="/">Home</a></li>
       <li><a href="/contents/">Contents</a></li>
-      <li><a class="nxtlink" href="/notes/optimal-computer/">Towards an optimal computer</a></li>
+      <li><a class="nxtlink" href="/notes/what-is-bend2/">What is Bend2?</a></li>
     </ul>
   </div>
 </Base>

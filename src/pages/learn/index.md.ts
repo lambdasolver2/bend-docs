@@ -2,7 +2,7 @@ import { getCollection } from "astro:content";
 
 export async function GET() {
   const learn = await getCollection("learn");
-  const md = ["# Learn by example", "", "Canonical: https://bend-docs.example.com/learn/", ""].concat(
+  const md = ["# Bend2 curriculum", "", "Canonical: https://bend-docs.example.com/learn/", ""].concat(
     learn.map((l) => `- [${l.data.title}](https://bend-docs.example.com/learn/${l.id.replace(/\.md$/, '')}/)`),
   );
   return new Response(md.join("\n") + "\n", {

@@ -29,6 +29,13 @@ JavaScript. Understanding the lineage makes Bend2's strangest choices
 (linear everything, Dead vs Live, synthesis-first) read as conclusions
 rather than quirks.
 
+## Proof-oriented programming
+
+Proofs are not only a way to certify mathematics. In HOC's tradition they
+are a programming tool: precise specifications make generated programs
+checkable, so synthesis can propose and the kernel can reject incorrect
+answers.
+
 ## Formality: proofs as superpowers
 
 Formality (Taelin, ~2018, "a modern programming language featuring formal

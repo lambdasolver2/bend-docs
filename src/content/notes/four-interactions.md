@@ -35,6 +35,16 @@ is never duplicated — even inside lambdas.
 
 ## The four rules
 
+Two create computation, two propagate it. Superpositions are introduced
+here, after the language and basic runtime foundations:
+
+## Superpositions
+
+Superposition `&L{a, b}` puts two values in one location. It is the
+runtime primitive behind branching search and shared evaluation; start with
+the [HVM4 hands-on examples](../learn/hvm-hands-on/) before treating it as
+a programming technique.
+
 Two create computation, two propagate it:
 
 1. **APP-LAM** — application eliminates lambda: `(λx.body)(arg)` binds

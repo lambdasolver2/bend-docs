@@ -51,11 +51,11 @@ export const CURRICULUM_GROUPS: CurriculumGroup[] = [
     items: [
       { n: 22, title: "Automatic parallelism", page: "/learn/parallelism/", updated: "2026-08-13" },
       { n: 23, title: "Sharing and duplication", page: page("sharing", "sharing-and-duplication") },
-      { n: 24, title: "Unscoped lambdas", page: page("sharing", "unscoped-lambdas-and-superpositions") },
-      { n: 25, title: "Superpositions", page: page("sharing", "unscoped-lambdas-and-superpositions") },
-      { n: 26, title: "Evaluation order", page: page("sharing", "evaluation-order-and-measuring-speedup") },
+      { n: 24, title: "Unscoped lambdas", page: page("sharing", "unscoped-lambdas") },
+      { n: 25, title: "Superpositions", page: page("sharing", "superpositions") },
+      { n: 26, title: "Evaluation order", page: page("sharing", "evaluation-order") },
       { n: 27, title: "Running on GPUs", page: "/learn/gpu/", updated: "2026-08-13" },
-      { n: 28, title: "Measuring speedup", page: page("sharing", "evaluation-order-and-measuring-speedup") },
+      { n: 28, title: "Measuring speedup", page: page("sharing", "measuring-speedup") },
     ],
   },
   {
@@ -63,7 +63,7 @@ export const CURRICULUM_GROUPS: CurriculumGroup[] = [
     items: [
       { n: 29, title: "Type annotations", page: page("types-proofs", "type-annotations") },
       { n: 30, title: "Polymorphism", page: page("types-proofs", "polymorphism") },
-      { n: 31, title: "Dependent types, first contact", page: page("types-proofs", "dependent-types-first-contact") },
+      { n: 31, title: "Dependent types", page: page("types-proofs", "dependent-types") },
       { n: 32, title: "Sized lists", page: page("types-proofs", "sized-lists") },
       { n: 33, title: "Equality", page: page("types-proofs", "equality") },
       { n: 34, title: "Proofs", page: "/learn/proofs/", updated: "2026-08-21" },
@@ -82,12 +82,12 @@ export const CURRICULUM_GROUPS: CurriculumGroup[] = [
   {
     name: "Effects and targets",
     items: [
-      { n: 40, title: "IO", page: page("effects-targets", "io-and-files") },
-      { n: 41, title: "Files", page: page("effects-targets", "io-and-files") },
-      { n: 42, title: "Command-line arguments", page: page("effects-targets", "io-and-files") },
-      { n: 43, title: "Compiling to C", page: page("effects-targets", "compiling-to-c-javascript-python") },
-      { n: 44, title: "Compiling to JavaScript", page: page("effects-targets", "compiling-to-c-javascript-python") },
-      { n: 45, title: "Compiling to Python", page: page("effects-targets", "compiling-to-c-javascript-python") },
+      { n: 40, title: "IO", page: page("effects-targets", "io") },
+      { n: 41, title: "Files", page: page("effects-targets", "files") },
+      { n: 42, title: "Command-line arguments", page: page("effects-targets", "command-line-arguments") },
+      { n: 43, title: "Compiling to C", page: page("effects-targets", "compiling-to-c") },
+      { n: 44, title: "Compiling to JavaScript", page: page("effects-targets", "compiling-to-javascript") },
+      { n: 45, title: "Compiling to Python", page: page("effects-targets", "compiling-to-python") },
     ],
   },
 ];

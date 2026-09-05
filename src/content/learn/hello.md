@@ -16,7 +16,7 @@ greeting — and in doing so shows how Bend2 handles effects: not as
 statements that happen, but as values of type `IO` that describe what to
 do.
 
-```bend2
+```python title="Bend2"
 // Status: documentation-only — no public compiler to run this against.
 import Base
 

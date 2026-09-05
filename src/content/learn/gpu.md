@@ -16,7 +16,7 @@ evaluates on the GPU where `sum(24, 0)` would use the CPU. The function is
 the [parallel sum](./parallelism.md), unchanged — only `main` differs.
 That is the entire GPU programming model.
 
-```bend2
+```python title="Bend2"
 // Status: documentation-only — no public compiler or backend to run this.
 def main() -> U32:
   sum!(24, 0)

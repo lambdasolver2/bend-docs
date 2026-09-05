@@ -198,6 +198,12 @@ const url = new URL(canonical, site).href;
       ol.chapters .part { font-family: Georgia, serif; color: var(--ink); }
       .part-heading { display: flex; align-items: baseline; gap: 0.9rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.4rem; }
       .part-heading h3 { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 1.25rem; font-style: normal; font-weight: 600; }
+      .reference-chapter { margin: 0 0 2.5rem; }
+      .reference-chapter .part-heading h2 { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 1.35rem; font-style: normal; font-weight: 600; }
+      .reference-chapter ol { list-style: none; padding: 0; margin: 0; }
+      .reference-chapter li { display: flex; align-items: baseline; gap: 0.8rem; border-bottom: 1px solid var(--rule); padding: 0.38rem 0; }
+      .reference-chapter li a { color: var(--ink); text-decoration: none; }
+      .reference-chapter li a:hover { color: var(--link-hover); text-decoration: underline; }
       ol.chapters .part-no {
         display: inline-block; min-width: 2.2rem;
         font-family: Arial, Helvetica, sans-serif; font-weight: bold;
@@ -300,7 +306,7 @@ const url = new URL(canonical, site).href;
               <li>
                 <strong>{group.title}</strong>
                 <ul>
-                  {group.items.map((item, index) => <li><a href={item.href}><span class="nav-no">{index + 1}</span>{item.title}</a></li>)}
+                  {group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}
                 </ul>
               </li>
             ))}
@@ -319,11 +325,11 @@ const url = new URL(canonical, site).href;
             <p>Documentation</p>
             {SITE_NAV.map((section) => (
               <div class="nav-section">
-                <a href={section.title === "The languages" ? "/learn/" : "/contents/"}>{section.title}</a>
+                <a href="/contents/">{section.title}</a>
                 {section.groups.map((group) => (
                   <div>
                     <span class="nav-group-title">{group.title}</span>
-                    <ul>{group.items.map((item, index) => <li><a href={item.href}><span class="nav-no">{index + 1}</span>{item.title}</a></li>)}</ul>
+                    <ul>{group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}</ul>
                   </div>
                 ))}
               </div>
@@ -370,6 +376,24 @@ const url = new URL(canonical, site).href;
           } else {
             installCopyButtons();
           }
+        })();
+        (() => {
+          const rail = document.querySelector(".toc");
+          if (!rail) return;
+          const key = "bend-docs:right-rail-scroll";
+          const save = () => {
+            try { sessionStorage.setItem(key, String(rail.scrollTop)); } catch { /* storage unavailable */ }
+          };
+          const restore = () => {
+            try {
+              const saved = Number(sessionStorage.getItem(key));
+              if (Number.isFinite(saved)) rail.scrollTop = saved;
+            } catch { /* storage unavailable */ }
+          };
+          rail.addEventListener("scroll", save, { passive: true });
+          rail.addEventListener("click", save);
+          addEventListener("pagehide", save, { once: true });
+          requestAnimationFrame(restore);
         })();
         (() => {
           const root = document.documentElement;

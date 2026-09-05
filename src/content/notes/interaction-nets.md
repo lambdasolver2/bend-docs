@@ -32,7 +32,7 @@ no interleaving can go wrong. Consensus isn't optimized away. It is
 unnecessary by construction.
 </div>
 
-## Why they are so great: the benefits up front
+## Why coordination is unnecessary
 
 - **No coordination.** Redexes are disjoint before any analysis runs; any
   idle worker fires any pending pair. Parallelism is scheduling, not a
@@ -52,7 +52,7 @@ unnecessary by construction.
 - **Three symbols suffice.** γ, δ, ε under six rules compute anything —
   the smallest universal machine with all of the above intact.
 
-## How copying works: the shared graph
+## Copying, erasure, and confluence
 
 A program is a graph, and sharing means what it says: two parents point
 at one child. When both parents need the child, a duplicator (δ) walks

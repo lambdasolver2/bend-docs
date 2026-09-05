@@ -25,7 +25,7 @@ lives.
 
 ## Sharing and duplication
 
-```bend2
+```python title="Bend2"
 def main() -> U32:
   x = 40 + 2      # one value...
   x + x           # ...two uses: this is the duplication point
@@ -37,15 +37,24 @@ checker demands it, shared values duplicate explicitly rather than by
 accident — the language-level face of the
 [runtime primitive](/notes/four-interactions/).
 
-## Unscoped lambdas and superpositions
+## Unscoped lambdas
 
-Both exist in the runtime today (`λ$x` binders, `&A{a,b}` values — run
-them in [HVM4 hands-on](./hvm-hands-on.md)). Their Bend2 surface syntax
-has no posted sample *(planned)*.
+Unscoped lambdas exist in the runtime today (`λ$x` binders — run them in
+[HVM4 hands-on](./hvm-hands-on.md)). Their Bend2 surface syntax has no
+posted sample *(planned)*.
 
-## Evaluation order and measuring speedup
+## Superpositions
+
+Superpositions are deliberately introduced later, in
+[HVM4 Runtime 9.4](../notes/four-interactions/#superpositions). Their
+Bend2 surface syntax has no posted sample *(planned)*.
+
+## Evaluation order
 
 Evaluation needs no annotations — order is the scheduler's business, and
-confluence keeps every schedule correct. Measuring speedup is a
-release-day exercise: same program, CPU call vs `!` call, with the
-runtime's interaction counters as the stopwatch *(planned)*.
+confluence keeps every schedule correct.
+
+## Measuring speedup
+
+Measuring speedup is a release-day exercise: same program, CPU call vs `!`
+call, with the runtime's interaction counters as the stopwatch *(planned)*.

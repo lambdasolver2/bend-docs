@@ -45,7 +45,7 @@ encodings), and two first-class primitives most runtimes lack:
   [interaction nets](./interaction-nets.md) page. Same label annihilates
   against a superposition; different labels multiply branches.
 
-```hvm
+```haskell title="HVM4"
 @main = (&A{1,2} + 10)
 //11
 //12

@@ -27,7 +27,7 @@ const badge =
 const titles = new Map<string, string>([
   ["/", "Home"],
   ["/contents/", "Contents"],
-  ["/learn/", "Learn by example"],
+  ["/learn/", "Bend2 curriculum"],
   ...(await getCollection("notes")).map((n) => [
     `/notes/${n.id.replace(/\.md$/, "")}/`,
     n.data.title,

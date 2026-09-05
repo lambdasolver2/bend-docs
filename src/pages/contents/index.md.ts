@@ -12,7 +12,7 @@ export async function GET() {
     "",
     ...notes.map((n) => `- [${n.data.title}](https://bend-docs.example.com/notes/${n.id.replace(/\.md$/, '')}/): verified ${n.data.verified}, status ${n.data.status}`),
     "",
-    "## Learn by example",
+    "## Bend2 curriculum",
     "",
     ...learn.map((l) => `- [${l.data.title}](https://bend-docs.example.com/learn/${l.id.replace(/\.md$/, '')}/): verified ${l.data.verified}, status ${l.data.status}`),
     "",
