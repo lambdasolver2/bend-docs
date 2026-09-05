@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/85b94b5ba5b8b5440ded64bba8c89ac2
 
-
 ## File: solving_the_mystery.md
 
 
@@ -351,3 +350,4 @@ tl;dr tl;dr
 -----------
 
 Magic.
+

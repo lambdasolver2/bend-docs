@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/60d3bc72fb4edefecd42095e44138b41
 
-
 ## File: collapse_monad.hs
 
 import Control.Monad (ap, forM_)
@@ -113,3 +112,4 @@ main = do
   -- Prints the sup-free term list
   forM_ coll $ \ term ->
     putStrLn $ showTerm term
+

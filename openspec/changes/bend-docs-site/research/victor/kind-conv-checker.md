@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/3f748a46e95071e29462b1ac93c294c5
 
-
 ## File: kind2_equality.md
 
 ## Kind2's Conversion Checker

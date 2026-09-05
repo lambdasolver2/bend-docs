@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/77fd5a2a8a4a07e1da6157ebca3c7cf1
 
-
 ## File: hoc_historical_overview.md
 
 
@@ -367,4 +366,5 @@ made me realize how many people care about my work and want us to succeed, which
 gives me determination. In another, such popularity in a moment where the
 language is still not so mature may not give the best perception, but that's
 something we'll have to keep in mind and work with.
+
 

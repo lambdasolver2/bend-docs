@@ -21,7 +21,19 @@ numeric patterns (`0`, `1+d`) are posted-sample syntax. Everything else
 is flagged.
 </div>
 
-## Algebraic data types and pattern matching
+## Algebraic data types
+
+The public samples use constructor-shaped values such as `Nat`.
+
+## Records
+
+Records have no public sample yet *(planned)*.
+
+## Maps
+
+Maps have no public sample yet *(planned)*.
+
+## Pattern matching
 
 The proofs sample matches `Nat` by constructors — brace-suffixed
 patterns, one arm per constructor:
@@ -36,20 +48,33 @@ def is_zero(n: Nat) -> Bool:
 ```
 
 Numeric matching works the same way (`case 0:` / `case 1+d:`, binding
-the predecessor). Lambda-match and mutual recursion have no public
-samples *(planned)*.
+the predecessor).
 
-## Records and maps
+## Lambda match
 
-No posted sample constructs a record or a map *(planned — shapes
-unknown)*. Expect them to follow the `def`/`match` register at release;
-this section will be written from the compiler, not from guesses.
+Lambda match has no public sample yet *(planned)*.
 
-## Recursion, higher-order functions, closures, folds
+## Recursion
 
 Recursion is ordinary self-call, as in the
-[parallel sum](./parallelism.md) — including mutual recursion, which is
-just two `def`s naming each other *(extrapolated but unsurprising)*.
-Higher-order functions, closures, and folds have no posted samples
-*(planned)*; the `bend` construct that gives Bend its name likewise
-awaits the release.
+[parallel sum](./parallelism.md).
+
+## Mutual recursion
+
+Mutual recursion has no public sample yet *(planned)*.
+
+## Higher-order functions
+
+Higher-order functions have no public sample yet *(planned)*.
+
+## Closures
+
+Closures have no public sample yet *(planned)*.
+
+## Folds
+
+Folds have no public sample yet *(planned)*.
+
+## The bend construct
+
+The `bend` construct that gives Bend its name awaits the public compiler.

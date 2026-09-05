@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/46936b9fdfc3f982f07963c11756e36b
 
-
 ## File: towards_an_optimal_computer.md
 
 Higher-Order Company: Towards an Optimal Computer
@@ -140,3 +139,4 @@ Calculus. The Higher-Order Company was created to research this new model of
 computation, and, through the different mindset it brings, catch insights that
 will let us produce groundbreaking technology that will push humanity towards
 the next level of computational maturity.
+

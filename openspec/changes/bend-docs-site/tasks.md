@@ -15,6 +15,8 @@
 - [x] 3.8 De-brand + rebrand pass: no Bend1/old-HVM/study-notes anywhere in dist, Bend Documentation identity, LYAH chapters ToC, Lean mirror-proof section
 - [x] 3.9 Square professional theme (zero border-radius) + sticky right-side section nav with build-extracted anchors, all links verified resolving
 - [x] 3.10 OCaml-style IV pages (prerequisites boxes, Lean goal transcript, remarks) + drop VI section (chain via curriculum order), numbered parts
+- [x] 3.11 Rebuild contents as a professional documentation index: centered responsive reading layout, permanent desktop documentation rail, mobile contents disclosure, six numbered chapters, and all 45 curriculum items with resolving URLs
+- [x] 3.12 Remove Python tooling from the repository; replace research fetch utility with Node ESM and verify no `*.py` files remain
 - [x] 2.2 Generate per-page Markdown mirrors, llms.txt, sitemap, robots, and verify mirrors match HTML content and llms.txt lists them
 
 ## 3. Astro site scaffold

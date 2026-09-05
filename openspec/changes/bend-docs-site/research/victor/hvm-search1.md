@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/d5c318348aaee7033eb3d18b0b0ace34
 
-
 ## File: fast_dps_add_carry.md
 
 ## HOC's Fast Discrete Program Search (DPS)
@@ -180,3 +179,4 @@ This is the heart of the algorithm we'll be running, and I'm posting it for anyo
 Even with all these tricks, the general problem is still exponential, but, by greatly optimizing the cost of a guess (all the way to <1 interaction), and with massive compute, this "dumb" approach can discover programs and proofs that would otherwise be intractable.
     
 Discussion: https://x.com/VictorTaelin/status/1819774880130158663
+

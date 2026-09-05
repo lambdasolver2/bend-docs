@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/311f6a58a7756945196c15733e61d0c6
 
-
 ## File: optimal_evaluation_in_1_or_10_or_10_years.md
 
 
@@ -149,3 +148,4 @@ And, despite looking embarrassingly inefficient, it performs as well as the "add
 ## Expert Version (10 years)
 
 If you're interested in the underlying theory behind optimal evaluation, start by reading [The Optimal Implementation of Functional Programming Languages](https://www.amazon.com/Implementation-Functional-Programming-Languages-Theoretical/dp/0521621127), by Andrea Asperti and Stefano Guerrini. If you want to explore this model of evaluation, [Bend](https://github.com/HigherOrderCO/Bend) is a practical programming language that will be optimally evaluated, but note that, in its current version, it isn't lazy yet - this will arrive later this year (2024). For now, you can use [HVM1](https://github.com/HigherOrderCO/HVM1) directly.
+

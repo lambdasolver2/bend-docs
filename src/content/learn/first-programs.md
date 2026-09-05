@@ -50,10 +50,10 @@ def main() -> U32:
   x
 ```
 
-## Conditionals and booleans
+## Conditionals
 
 Branching goes through `match`. The posted samples match numbers and
-constructors; booleans follow the same shape *(extrapolated)*:
+constructors; this is the documented shape for a conditional.
 
 ```bend2
 def describe(n: U32) -> U32:
@@ -64,16 +64,36 @@ def describe(n: U32) -> U32:
       1
 ```
 
-## Numbers, strings, tuples
+## Booleans
 
-- Numbers are typed (`U32` in every sample); arithmetic is plain `+`.
-- Strings concatenate with `++` and print through `IO::print` (see
-  [hello](./hello.md)).
-- Tuples destructure in assignment position: `a, b = f(x), g(x)`.
+Boolean constructors and boolean operators are not yet demonstrated by a
+public Bend2 sample. This curriculum entry is reserved for the release
+syntax and is intentionally marked planned.
 
-## Lists and imports
+## Numbers
 
-`import Base` (every sample) brings in the standard library, including
-`IO`. List syntax has no public sample yet *(planned — shape unknown)*;
-by the language's Python flavor, expect construction and `match`
-decomposition in the same register as numbers, verified at release.
+Numbers are typed. The public samples use `U32`, including successor-style
+matching with `case 0:` and `case 1+d:`.
+
+```bend2
+def identity(n: U32) -> U32:
+  n
+```
+
+## Strings and characters
+
+Strings concatenate with `++` and print through `IO::print` (see
+[hello](./hello.md)). Characters and escaping are planned.
+
+## Tuples
+
+Tuples destructure in assignment position: `a, b = f(x), g(x)`.
+
+## Lists
+
+List syntax has no public sample yet *(planned — shape unknown)*.
+
+## Imports
+
+`import Base` (every public sample) brings in the standard library,
+including `IO`.

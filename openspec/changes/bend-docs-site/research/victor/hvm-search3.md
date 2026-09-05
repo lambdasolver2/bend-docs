@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/7c4c69a1f07b5c668be613f1032e7d4e
 
-
 ## File: superposed_lambda_calculus_evaluator.c
 
 // This file is a mirror of:

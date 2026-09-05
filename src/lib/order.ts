@@ -9,39 +9,34 @@ export interface Part {
 
 export const PARTS: Part[] = [
   {
-    no: "0", title: "The vision",
+    no: "01", title: "The vision",
     blurb: "Why any of this exists: computability is settled, computation is not.",
     slugs: ["/notes/optimal-computer/"],
   },
   {
-    no: "I", title: "Foundations",
+    no: "02", title: "Foundations",
     blurb: "The model of computation underneath everything. Read these first and the rest is vocabulary.",
     slugs: ["/notes/interaction-nets/", "/notes/four-interactions/"],
   },
   {
-    no: "II", title: "The machine",
+    no: "03", title: "The machine",
     blurb: "The current runtime plus the calculus it implements — including code you can run tonight.",
     slugs: ["/notes/hvm-runtime/", "/learn/hvm-hands-on/"],
   },
   {
-    no: "III", title: "Search and synthesis",
+    no: "04", title: "Search and synthesis",
     blurb: "Superposition as a search engine: SAT without loops, programs from templates, SupGen's ancestry.",
     slugs: ["/notes/search-by-superposition/"],
   },
   {
-    no: "IV", title: "The languages",
+    no: "05", title: "The languages",
     blurb: "The proof lineage behind Bend2's types, and the two rivals that define it by contrast.",
     slugs: ["/notes/proof-lineage/", "/notes/vs-mojo/", "/notes/vs-lean/"],
   },
   {
-    no: "V", title: "Bend2 today",
+    no: "06", title: "Bend2 today",
     blurb: "What the unreleased successor is, and the dated trail of when it might arrive.",
     slugs: ["/notes/what-is-bend2/", "/notes/release-status/"],
-  },
-  {
-    no: "VI", title: "Learn by example",
-    blurb: "The 45-item curriculum in new Bend2 syntax, plus the HVM page that runs today.",
-    slugs: ["/learn/"],
   },
 ];
 

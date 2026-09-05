@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/93c327e5b4e752b744d7798687977f8a
 
-
 ## File: truly_optimal_evaluation_with_unordered_superpositions.md
 
 # Truly Optimal Evaluation with Unordered Superpositions
@@ -1054,3 +1053,4 @@ x <- #{ax bx cx ...}
 ------------- UDUP-W32
 x <- 123
 ```
+

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import { PARTS as parts } from "../lib/order";
+import { CURRICULUM_GROUPS } from "../lib/curriculum";
 
 const notes = await getCollection("notes");
 const learn = await getCollection("learn");
@@ -24,36 +25,23 @@ const tracks: { name: string; path: string[] }[] = [
   mdMirror="/contents/index.md"
 >
   <h1>Contents</h1>
-  <h2>Tracks</h2>
-  <ul>
-    {tracks.map((t) => (
-      <li>
-        <strong>{t.name}:</strong>{" "}
-        {t.path.map((s, i) => (
-          <span>{i > 0 && " → "}<a href={s}>{bySlug.get(s)?.data.title ?? s}</a></span>
-        ))}
-      </li>
-    ))}
-  </ul>
-  <h2>Chapters</h2>
+  <p class="lede">A guided route through the ideas, the runtime, the language, and the curriculum.</p>
+  <h2>Documentation</h2>
   <ol class="chapters">
     {parts.map((p) => (
       <li>
-        <span class="part"><span class="part-no">{p.no}</span> {p.title}</span>
-        <span class="meta"> — {p.blurb}</span>
+        <div class="part-heading">
+          <span class="part-no">{p.no}</span>
+          <h3>{p.title}</h3>
+        </div>
+        <p class="part-blurb">{p.blurb}</p>
         <ul>
           {p.slugs.map((s) => {
             const e = bySlug.get(s);
             const title = e?.data.title ?? (s === "/learn/" ? "Learn by example" : s);
-            const desc =
-              e?.data.description ??
-              (s === "/learn/"
-                ? "The 45-item curriculum in new Bend2 syntax, plus the HVM page that runs today."
-                : "");
             return (
               <li>
                 <a href={s}>{title}</a>
-                <span class="meta"> — {desc}</span>
               </li>
             );
           })}
@@ -61,6 +49,22 @@ const tracks: { name: string; path: string[] }[] = [
       </li>
     ))}
   </ol>
+  <h2>Learn by example</h2>
+  <p class="section-intro">Forty-five small topics, each with its own address. Pages marked planned are deliberately honest about the current pre-release surface.</p>
+  {CURRICULUM_GROUPS.map((group) => (
+    <section class="curriculum-group">
+      <h3>{group.name}</h3>
+      <ol class="curriculum-list">
+        {group.items.map((item) => (
+          <li>
+            <span class="curriculum-no">{item.n}</span>
+            <a href={item.page}>{item.title}</a>
+            {item.updated && <time datetime={item.updated}>{item.updated}</time>}
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
   <div class="footdiv">
     <ul>
       <li><a class="prevlink" href="/">Home</a></li>

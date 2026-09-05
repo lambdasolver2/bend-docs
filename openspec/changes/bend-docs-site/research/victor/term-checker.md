@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/676241eb4e290a006e5618f97b8a1c25
 
-
 ## File: mini_termination_checker_via_fold_generation.hs
 
 -- ============================================================================
@@ -423,3 +422,4 @@ main = do
     putStrLn ("-- " ++ lbl)
     putStrLn (show_term 0 (folds sk fn ty []))
     putStrLn ""
+

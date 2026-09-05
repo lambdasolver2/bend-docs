@@ -2,7 +2,6 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { neighbors, LEARN_ORDER } from "../../lib/order";
-import ids from "../../lib/heading-ids.json";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -15,7 +14,7 @@ export async function getStaticPaths() {
 interface Props { entry: CollectionEntry<"notes">; }
 const { entry } = Astro.props;
 const slug = entry.id.replace(/\.md$/, "");
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const mirror = `/notes/${slug}/index.md`;
 const badge =
   entry.data.status === "runnable"
@@ -39,7 +38,11 @@ const titles = new Map<string, string>([
   ] as const),
 ]);
 const nav = neighbors(entry.data.canonical, titles, [LEARN_ORDER]);
-const toc = (ids as Record<string, { id: string; text: string; depth: number }[]>)[entry.data.canonical] ?? [];
+const toc = headings.map((heading) => ({
+  id: heading.slug,
+  text: heading.text,
+  depth: heading.depth,
+}));
 ---
 
 <Base

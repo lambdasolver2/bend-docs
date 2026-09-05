@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/9061306220929f04e7e6980f23ade615
 
-
 ## File: sat.md
 
 
@@ -228,3 +227,4 @@ Main =
 ```
 
 Discussion: https://twitter.com/VictorTaelin/status/1744788091833917696
+

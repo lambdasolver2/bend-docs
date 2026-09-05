@@ -6,6 +6,7 @@ interface Props {
   mdMirror?: string;
   toc?: { id: string; text: string; depth: number }[];
 }
+import { SITE_NAV } from "../lib/site-nav";
 const { title, description, canonical, mdMirror, toc } = Astro.props;
 const site = "https://bend-docs.example.com";
 const url = new URL(canonical, site).href;
@@ -181,17 +182,24 @@ const url = new URL(canonical, site).href;
       .label-cl { background: #c3c; color: #fff; }
       .label-law { background: #9dc; color: #000; }
       ol.chapters { list-style: none; padding-left: 0; }
-      ol.chapters > li { margin-bottom: 1rem; }
+      ol.chapters > li { margin-bottom: 2.2rem; }
       ol.chapters .part { font-family: Georgia, serif; color: var(--ink); }
+      .part-heading { display: flex; align-items: baseline; gap: 0.9rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.4rem; }
+      .part-heading h3 { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 1.25rem; font-style: normal; font-weight: 600; }
       ol.chapters .part-no {
         display: inline-block; min-width: 2.2rem;
         font-family: Arial, Helvetica, sans-serif; font-weight: bold;
         font-size: 1.5rem; color: var(--accent); margin-right: 0.4rem;
       }
-      ol.chapters > li > ul { line-height: 2; }
+      .part-blurb { color: var(--muted); font-size: 0.95rem; margin: 0.55rem 0 0.35rem; }
+      ol.chapters > li > ul { line-height: 1.9; }
       ol.chapters > li > ul > li { list-style-type: none; font-size: 1rem; }
       ol.chapters > li > ul > li > a { color: var(--ink); }
       ol.chapters > li > ul > li > a:hover { color: var(--link-hover); text-decoration: underline; }
+      .curriculum-list { list-style: none; padding: 0; margin: 0; }
+      .curriculum-list li { display: flex; align-items: baseline; gap: 0.75rem; border-bottom: 1px solid var(--rule); padding: 0.35rem 0; }
+      .curriculum-no { color: var(--accent); font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-variant-numeric: tabular-nums; min-width: 2rem; }
+      .curriculum-list time { color: var(--muted); font-size: 0.78rem; margin-left: auto; font-variant-numeric: tabular-nums; }
       .footdiv { width: 100%; display: table; margin: 2.5rem 0 1rem; border-top: 1px solid var(--ink); padding-top: 0.75rem; }
       .footdiv ul { display: table-row; margin: 0; padding: 0; list-style: none; }
       .footdiv ul li { display: table-cell; width: 33%; }
@@ -205,19 +213,39 @@ const url = new URL(canonical, site).href;
       .prereq p:first-child { font-family: Arial, Helvetica, sans-serif; font-weight: bold; margin-bottom: 0.5rem; }
       .prereq ul { list-style-type: disc; }
       .prereq ul li::marker { color: var(--link); }
-      .doc-layout { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 2.5rem; align-items: start; }
-      .doc-main { min-width: 0; max-width: 46rem; }
-      aside.toc { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.85rem; border-left: 1px solid var(--rule); padding-left: 1rem; }
-      aside.toc p { font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.5rem; color: var(--muted); }
+      .doc-layout { display: grid; grid-template-columns: minmax(0, 760px) 250px; gap: 3rem; justify-content: center; align-items: start; }
+      .doc-main { min-width: 0; width: 100%; }
+      aside.toc { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.82rem; border-left: 1px solid var(--rule); padding: 0 0.75rem 1rem 1rem; }
+      aside.toc p { font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.65rem; color: var(--muted); }
+      aside.toc .nav-section { margin: 0 0 1.2rem; }
+      aside.toc .nav-section > a, aside.toc .nav-group-title { display: block; font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: var(--ink); margin: 0.65rem 0 0.25rem; text-decoration: none; }
       aside.toc ul { list-style: none; margin: 0; padding: 0; }
-      aside.toc li { margin: 0.3rem 0; line-height: 1.4; }
-      aside.toc li.sub { padding-left: 0.9rem; }
-      aside.toc a { color: var(--muted); text-decoration: none; }
-      aside.toc a:hover { color: var(--link-hover); }
+      aside.toc li { margin: 0; line-height: 1.35; }
+      aside.toc li a { display: block; padding: 0.18rem 0; color: var(--muted); text-decoration: none; }
+      aside.toc li a:hover { color: var(--link-hover); }
+      aside.toc .local-toc { border-top: 1px solid var(--rule); margin-top: 1rem; padding-top: 0.75rem; }
+      aside.toc .local-toc li { padding-left: 0.7rem; }
+      .mobile-doc-nav { display: none; }
       @media (max-width: 1024px) {
         .doc-layout { display: block; }
-        .doc-main { max-width: none; }
+        .doc-main { max-width: 760px; margin-inline: auto; }
         aside.toc { display: none; }
+        .mobile-doc-nav { display: block; border-block: 1px solid var(--rule); margin: 0 0 1.5rem; }
+        .mobile-doc-nav summary { cursor: pointer; padding: 0.65rem 0; font-family: Arial, Helvetica, sans-serif; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.06em; text-transform: uppercase; }
+        .mobile-doc-nav > ul { list-style: none; padding: 0 0 0.8rem; margin: 0; columns: 2; column-gap: 1.5rem; }
+        .mobile-doc-nav > ul > li { break-inside: avoid; margin: 0.3rem 0 0.8rem; }
+        .mobile-doc-nav > ul > li > ul { list-style: none; padding: 0; margin: 0.25rem 0 0; columns: 1; }
+        .mobile-doc-nav > ul > li > ul > li { margin: 0.2rem 0; }
+        .mobile-doc-nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
+      }
+      @media (max-width: 560px) {
+        body { font-size: 1rem; line-height: 1.6; }
+        main, footer { max-width: none; width: 100%; padding-inline: 1rem; }
+        .running-head { max-width: none; padding-inline: 1rem; }
+        h1 { font-size: 2.2rem; }
+        .mobile-doc-nav ul { columns: 1; }
+        .footdiv ul, .footdiv ul li { display: block; width: 100%; }
+        .footdiv ul li { margin: 0.4rem 0; text-align: left !important; }
       }
       figure { margin: 1.75rem 0; }
       figure svg { max-width: 100%; height: auto; display: block; }
@@ -243,22 +271,43 @@ const url = new URL(canonical, site).href;
       </div>
     </header>
     <main>
+      <details class="mobile-doc-nav">
+        <summary>Documentation contents</summary>
+        {SITE_NAV.map((section) => (
+          <ul>
+            {section.groups.map((group) => (
+              <li>
+                <strong>{group.title}</strong>
+                <ul>
+                  {group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </details>
       <div class="doc-layout">
         <div class="doc-main">
           <slot />
         </div>
-        {toc && toc.length > 0 && (
-          <aside class="toc" aria-label="On this page">
-            <p>On this page</p>
-            <ul>
-              {toc.map((h) => (
-                <li class={h.depth === 3 ? "sub" : undefined}>
-                  <a href={`#${h.id}`}>{h.text}</a>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        )}
+        <aside class="toc" aria-label="Documentation navigation">
+            <p>Documentation</p>
+            {SITE_NAV.map((section) => (
+              <div class="nav-section">
+                <a href={section.title === "Learn by example" ? "/learn/" : "/contents/"}>{section.title}</a>
+                {section.groups.map((group) => (
+                  <div>
+                    <span class="nav-group-title">{group.title}</span>
+                    <ul>{group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            ))}
+            {toc && toc.length > 0 && <div class="local-toc">
+              <p>On this page</p>
+              <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
+            </div>}
+        </aside>
       </div>
     </main>
     <footer>

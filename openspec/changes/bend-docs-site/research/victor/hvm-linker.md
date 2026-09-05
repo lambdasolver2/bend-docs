@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/2aba162f2b04478dc53e5615f482db7b
 
-
 ## File: hvm3_atomic_linker.md
 
 # HVM3's Optimal Atomic Linker (with Polarization)
@@ -273,3 +272,4 @@ a snapshot of the complete implementation using
 [Kind-Lang](https://github.com/HigherOrderCO/Kind). To run it, you need to
 download the [KindBook](https://github.com/HigherOrderCO/kindbook) library.
 There is also a [standalone C implementation](https://gist.github.com/VictorTaelin/27e1bce6f5c8d2f89aafef75025b4765).
+

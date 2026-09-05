@@ -2,7 +2,6 @@
 
 URL: https://gist.github.com/VictorTaelin/a5571afaf5ee565689d2b9a981bd9df8
 
-
 ## File: simple_fast_functional_sieve.md
 
 
@@ -139,3 +138,4 @@ with the `-L` flag.*
 This discussion is taking place right now on HOC's Discord:
 
 https://discord.HigherOrderCO.com/ (#hvm channel)
+
