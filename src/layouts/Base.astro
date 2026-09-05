@@ -327,9 +327,6 @@ const url = new URL(canonical, site).href;
         <ul>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ul>
       </details>}
       <div class="doc-layout">
-        <div class="doc-main">
-          <slot />
-        </div>
         <aside class="toc-rail global-toc" data-rail="documentation" aria-label="Documentation navigation">
             <p>Documentation</p>
             {SITE_NAV.map((section) => (
@@ -344,6 +341,9 @@ const url = new URL(canonical, site).href;
               </div>
             ))}
         </aside>
+        <div class="doc-main">
+          <slot />
+        </div>
         <aside class="toc-rail page-toc" data-rail="page" aria-label="On this page">
           <p>On this page</p>
           {toc && toc.length > 0
