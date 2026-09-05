@@ -30,6 +30,7 @@
 - [x] 3.12 Remove Python tooling from the repository; replace research fetch utility with Node ESM and verify no `*.py` files remain
 - [x] 3.13 Editorial callout restyle (hairline box, top accent rule, small-caps label, no tint) + color-coded annihilation/commutation figures with wire correspondence
 - [x] 3.14 Approved Lean-style 1–10 TOC: decimal section addresses, deferred superposition material, group-only right rail, restored rail scroll position, and code-copy controls
+- [x] 3.15 Independent per-rail scroll memory, dead markup removal, and one-address-per-curriculum-item splits
 
 ## 4. Alchemy deploy (blocked on user credentials)
 
