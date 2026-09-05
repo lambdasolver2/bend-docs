@@ -34,6 +34,7 @@
 - [x] 3.16 Anchor-based rail restore (remembers top link, not pixels) so font-load reflow can't shift position
 - [x] 3.16 Professional voice pass: 960px effective column, beginner-first Types and Proofs chapter, process meta-text removed (status lives in badges)
 - [x] 3.17 Expert audit pass: correct Bend2/HVM code labels via aliases, single SITE source of truth, right rail derived from TOC (no drift), astro check clean
+- [x] 3.18 Figure correctness audit: fixed inverted rule-firing pair, rewired commutation result to true port correspondence, connected floating fork join, exact 8:24:32 word bar
 
 ## 4. Alchemy deploy (blocked on user credentials)
 

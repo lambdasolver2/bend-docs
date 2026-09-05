@@ -42,23 +42,26 @@ interaction-net runtime they are disjoint subgraphs — recall
 — and any idle core reduces either one without locks.
 
 <figure>
-<svg width="420" height="180" viewBox="0 0 420 180" role="img" aria-label="Fork tree: sum splits into two halves that evaluate independently then join">
+<svg width="420" height="192" viewBox="0 0 420 192" role="img" aria-label="Fork tree: sum splits into two halves that evaluate independently then join">
 <g fill="none" stroke="currentColor" stroke-width="1.5">
 <circle cx="210" cy="25" r="14"/>
-<line x1="200" y1="37" x2="110" y2="85"/>
-<line x1="220" y1="37" x2="310" y2="85"/>
-<circle cx="100" cy="100" r="14"/>
-<circle cx="320" cy="100" r="14"/>
-<line x1="100" y1="114" x2="100" y2="140"/>
-<line x1="320" y1="114" x2="320" y2="140"/>
-<line x1="115" y1="155" x2="195" y2="155"/>
-<line x1="305" y1="155" x2="225" y2="155"/>
+<line x1="198" y1="33" x2="117" y2="89"/>
+<line x1="222" y1="33" x2="304" y2="89"/>
+<circle cx="100" cy="100" r="20"/>
+<circle cx="320" cy="100" r="20"/>
+<line x1="100" y1="120" x2="100" y2="140"/>
+<line x1="320" y1="120" x2="320" y2="140"/>
+<line x1="100" y1="140" x2="210" y2="163"/>
+<line x1="320" y1="140" x2="210" y2="163"/>
+<circle cx="210" cy="163" r="4" fill="currentColor"/>
 </g>
 <g font-size="13" fill="currentColor" text-anchor="middle">
 <text x="210" y="30">sum</text>
-<text x="100" y="105">left</text>
-<text x="320" y="105">right</text>
-<text x="210" y="172">a + b joins</text>
+<text x="210" y="184">a + b joins</text>
+</g>
+<g font-size="12" fill="currentColor" text-anchor="middle">
+<text x="100" y="104">left</text>
+<text x="320" y="104">right</text>
 </g>
 </svg>
 <figcaption>The fork: one call becomes two disjoint subgraphs; <i>a + b</i> is the only join.</figcaption>

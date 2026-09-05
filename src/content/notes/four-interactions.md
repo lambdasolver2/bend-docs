@@ -101,15 +101,15 @@ label, op code, or binder level; VAL is a heap slot or an unboxed `u32`.
 <figure>
 <svg width="420" height="90" viewBox="0 0 420 90" role="img" aria-label="64-bit HVM term layout: 8-bit tag, 24-bit ext, 32-bit val">
 <g font-size="14" text-anchor="middle">
-<rect x="10" y="20" width="60" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
-<rect x="70" y="20" width="160" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
-<rect x="230" y="20" width="180" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
-<text x="40" y="45" fill="currentColor">TAG</text>
-<text x="150" y="45" fill="currentColor">EXT</text>
-<text x="320" y="45" fill="currentColor">VAL</text>
-<text x="40" y="76" font-size="12" fill="currentColor">8</text>
-<text x="150" y="76" font-size="12" fill="currentColor">24</text>
-<text x="320" y="76" font-size="12" fill="currentColor">32</text>
+<rect x="10" y="20" width="50" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<rect x="60" y="20" width="150" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<rect x="210" y="20" width="200" height="40" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="35" y="45" fill="currentColor">TAG</text>
+<text x="135" y="45" fill="currentColor">EXT</text>
+<text x="310" y="45" fill="currentColor">VAL</text>
+<text x="35" y="76" font-size="12" fill="currentColor">8</text>
+<text x="135" y="76" font-size="12" fill="currentColor">24</text>
+<text x="310" y="76" font-size="12" fill="currentColor">32</text>
 </g>
 </svg>
 <figcaption>One HVM term: a single 64-bit word. Numbers live unboxed in VAL.</figcaption>
