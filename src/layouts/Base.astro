@@ -9,6 +9,8 @@ interface Props {
 import { SITE_NAV } from "../lib/site-nav";
 import { SITE } from "../lib/site";
 const { title, description, canonical, mdMirror, toc } = Astro.props;
+const normPath = (p: string) => p.split("#")[0].replace(/\/+$/, "") || "/";
+const isActive = (href: string) => !href.includes("#") && normPath(href) === normPath(canonical);
 const site = SITE;
 const url = new URL(canonical, site).href;
 ---
@@ -254,8 +256,10 @@ const url = new URL(canonical, site).href;
       .toc-rail .nav-section > a, .toc-rail .nav-group-title { display: block; font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: var(--ink); margin: 0.65rem 0 0.25rem; text-decoration: none; }
       .toc-rail ul { list-style: none; margin: 0; padding: 0; }
       .toc-rail li { margin: 0; line-height: 1.35; }
-      .toc-rail li a { display: block; padding: 0.18rem 0; color: var(--muted); text-decoration: none; }
+      .toc-rail li a { display: block; padding: 0.18rem 0 0.18rem 0.55rem; color: var(--muted); text-decoration: none; border-left: 2px solid transparent; transition: color 0.2s ease, border-color 0.2s ease, background-color 1.2s ease-out; }
       .toc-rail li a:hover { color: var(--link-hover); }
+      .toc-rail li a[aria-current="page"] { color: var(--accent); font-weight: bold; border-left-color: var(--accent); animation: railActive 1.4s ease-out 1; }
+      @keyframes railActive { from { background-color: color-mix(in srgb, var(--accent) 22%, transparent); } to { background-color: transparent; } }
       .page-toc li { padding-left: 0.7rem; }
       .mobile-doc-nav, .mobile-page-nav { display: none; }
       @media (max-width: 1024px) {
@@ -316,7 +320,7 @@ const url = new URL(canonical, site).href;
               <li>
                 <strong>{group.title}</strong>
                 <ul>
-                  {group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}
+                  {group.items.map((item) => <li><a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.title}</a></li>)}
                 </ul>
               </li>
             ))}
@@ -336,7 +340,7 @@ const url = new URL(canonical, site).href;
                 {section.groups.map((group) => (
                   <div>
                     <span class="nav-group-title">{group.title}</span>
-                    <ul>{group.items.map((item) => <li><a href={item.href}>{item.title}</a></li>)}</ul>
+                    <ul>{group.items.map((item) => <li><a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.title}</a></li>)}</ul>
                   </div>
                 ))}
               </div>
@@ -413,15 +417,57 @@ const url = new URL(canonical, site).href;
         })();
         (() => {
           document.querySelectorAll(".toc-rail[data-rail]").forEach((rail) => {
-            const key = `bend-docs:rail-scroll:${rail.getAttribute("data-rail")}:v3`;
+            const key = `bend-docs:rail-scroll:${rail.getAttribute("data-rail")}:v4`;
+            const readSaved = () => {
+              try {
+                const raw = localStorage.getItem(key);
+                if (raw === null) return null;
+                const parsed = JSON.parse(raw);
+                if (typeof parsed === "number" && Number.isFinite(parsed)) return { y: parsed };
+                if (parsed && typeof parsed === "object") return parsed;
+                return null;
+              } catch { return null; }
+            };
             const save = () => {
-              try { localStorage.setItem(key, String(rail.scrollTop)); } catch { /* storage unavailable */ }
+              try {
+                const top = rail.getBoundingClientRect().top;
+                let anchor = null, off = 0;
+                for (const a of rail.querySelectorAll("a[href]")) {
+                  const t = a.getBoundingClientRect().top - top;
+                  if (t <= 4) { anchor = a.getAttribute("href"); off = Math.round(t); }
+                  else break;
+                }
+                localStorage.setItem(key, JSON.stringify(
+                  anchor ? { h: anchor, o: off } : { y: Math.round(rail.scrollTop) },
+                ));
+              } catch { /* storage unavailable */ }
+            };
+            const applyAnchor = (s) => {
+              let el = null;
+              try { el = s.h ? rail.querySelector(`a[href="${CSS.escape(s.h)}"]`) : null; }
+              catch { el = null; }
+              if (!(el instanceof HTMLElement)) return false;
+              rail.scrollTop += (el.getBoundingClientRect().top - rail.getBoundingClientRect().top) - (s.o || 0);
+              return true;
             };
             const restore = () => {
-              try {
-                const saved = Number(localStorage.getItem(key));
-                if (Number.isFinite(saved)) rail.scrollTop = saved;
-              } catch { /* storage unavailable */ }
+              const s = readSaved();
+              if (s) {
+                if (applyAnchor(s)) return;
+                if (typeof s.y === "number" && Number.isFinite(s.y)) {
+                  rail.scrollTop = s.y;
+                  return;
+                }
+              }
+              const active = rail.querySelector('[aria-current="page"]');
+              if (active instanceof HTMLElement) {
+                rail.scrollTop = Math.max(0, active.offsetTop - rail.clientHeight / 2);
+              }
+            };
+            const restoreSoon = () => {
+              restore();
+              requestAnimationFrame(() => requestAnimationFrame(restore));
+              setTimeout(restore, 100);
             };
             let frame;
             rail.addEventListener("scroll", () => {
@@ -430,14 +476,13 @@ const url = new URL(canonical, site).href;
             }, { passive: true });
             rail.addEventListener("click", save);
             addEventListener("pagehide", save);
-            addEventListener("pageshow", () => {
-              restore();
-              requestAnimationFrame(() => requestAnimationFrame(restore));
-              setTimeout(restore, 100);
-            });
-            restore();
-            requestAnimationFrame(() => requestAnimationFrame(restore));
-            setTimeout(restore, 100);
+            addEventListener("pageshow", restoreSoon);
+            if (document.readyState === "complete") restoreSoon();
+            else addEventListener("load", restoreSoon, { once: true });
+            if (document.fonts && document.fonts.ready) {
+              document.fonts.ready.then(restoreSoon).catch(() => {});
+            }
+            restoreSoon();
           });
         })();
         (() => {
