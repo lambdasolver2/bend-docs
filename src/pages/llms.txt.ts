@@ -1,6 +1,5 @@
 import { getCollection } from "astro:content";
-
-const SITE = "https://bend-docs.example.com";
+import { SITE } from "../lib/site";
 
 export async function GET() {
   const notes = await getCollection("notes");

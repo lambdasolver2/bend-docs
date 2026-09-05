@@ -29,7 +29,7 @@ gcc -O2 -o hvm hvm.c   # a few warnings, builds fine
 Books are `@name = term` lines; application is `f(a, b)` — never `f a b`
 (whitespace application is a parse error). Lambdas use `λ`:
 
-```haskell title="HVM4"
+```hvm
 @add = λa. λb. (a + b)
 @main = @add(1, 2)
 //3
@@ -40,7 +40,7 @@ Actual run: `3`, 3 interactions, 23 heap nodes. Three interactions for
 
 ## Superposition: one location, two values
 
-```haskell title="HVM4"
+```hvm
 @main = (&A{1,2} + 10)
 ```
 
@@ -55,14 +55,14 @@ erasure), and there must be no spaces inside the braces.
 A duplication meeting a superposition with the **same** label extracts
 pairwise; with **different** labels it multiplies branches:
 
-```haskell title="HVM4"
+```hvm
 @main =
   !x&A = &A{1, 2};
   [x₀, x₁]
 //[1,2]          -- one result, 1 interaction
 ```
 
-```haskell title="HVM4"
+```hvm
 @main =
   !x&A = &B{1, 2};
   [x₀, x₁]
@@ -77,13 +77,13 @@ and `x₁` (subscripts required); `[a, b]` is list sugar.
 
 Variables may be used at most once. This fails:
 
-```haskell title="HVM4"
+```hvm
 @bad = λx. (x + x)   // PARSE/AFFINITY ERROR: x used twice
 ```
 
 The fix is a cloned binder — `&` tells the parser to insert duplication:
 
-```haskell title="HVM4"
+```hvm
 @square = λ&x. (x * x)
 @main = @square(5)
 //25               -- verified: 3 interactions
@@ -95,7 +95,7 @@ never apply an inline match (`λ{...}(x)`).
 
 ## Fib, with a stopwatch
 
-```haskell title="HVM4"
+```hvm
 @fib = λ{
   0: 0
   1: 1
@@ -114,7 +114,7 @@ its binder (`λ&n.` — cloned, since `n` is used twice).
 The primer's `<>:` list-cons pattern does **not** parse on current main
 (`expected: name`). Match the constructor explicitly:
 
-```haskell title="HVM4"
+```hvm
 @len = λ{
   []: 0
   #CON: λh. λt. (1 + @len(t))

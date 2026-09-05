@@ -17,7 +17,7 @@ meets them.
 
 ## Functions
 
-```python title="Bend2"
+```bend2
 import Base
 
 # Adds two numbers.
@@ -36,7 +36,7 @@ the arrow, and the body is an expression — no `return`.
 Tuple assignment splits two calls at once (the fork from
 [parallelism](./parallelism.md)). A single binding is the same shape:
 
-```python title="Bend2"
+```bend2
 def main() -> U32:
   x = 40 + 2
   x
@@ -46,7 +46,7 @@ def main() -> U32:
 
 Branching goes through `match` on numbers and constructors.
 
-```python title="Bend2"
+```bend2
 def describe(n: U32) -> U32:
   match n:
     case 0:
@@ -64,7 +64,7 @@ Boolean constructors and operators *(planned)*.
 Numbers are typed as `U32`, including successor-style matching with
 `case 0:` and `case 1+d:`.
 
-```python title="Bend2"
+```bend2
 def identity(n: U32) -> U32:
   n
 ```

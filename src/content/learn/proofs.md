@@ -18,7 +18,7 @@ an ordinary `def` carrying the same name: the claim, then the evidence.
 Here the claim is that addition commutes, and the argument is the
 standard Peano one, induction on the first argument.
 
-```python title="Bend2"
+```bend2
 import Base
 
 # Theorem: "for all numbers a and b, a + b equals b + a".

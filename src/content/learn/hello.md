@@ -16,7 +16,7 @@ greeting — and in doing so shows how Bend2 handles effects: not as
 statements that happen, but as values of type `IO` that describe what to
 do.
 
-```python title="Bend2"
+```bend2
 import Base
 
 # Performs effects on the CPU.

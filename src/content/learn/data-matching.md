@@ -31,7 +31,7 @@ Maps *(planned)*.
 The proofs sample matches `Nat` by constructors — brace-suffixed
 patterns, one arm per constructor:
 
-```python title="Bend2"
+```bend2
 def is_zero(n: Nat) -> Bool:
   match n:
     case Z{}:

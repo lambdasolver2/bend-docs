@@ -24,7 +24,7 @@ lives.
 
 ## Sharing and duplication
 
-```python title="Bend2"
+```bend2
 def main() -> U32:
   x = 40 + 2      # one value...
   x + x           # ...two uses: this is the duplication point
