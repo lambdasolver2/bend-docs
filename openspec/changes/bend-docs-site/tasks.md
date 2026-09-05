@@ -12,11 +12,6 @@
 - [x] 2.5 Victor's writings pass: HOC essays, HVM how/10-min/mystery, HOW.md, SAT solver, program-search series, Kind conversion checker, deforestation note, Bend release + HN reception — fetch all reachable, gap-note the rest
 - [x] 2.6 Full docs rewrite from 2.5: professional formatting throughout, callout boxes + color, original diagrams, every claim cited
 - [x] 2.8 Bend2-by-Example curriculum (45 items, 6 groups): new-syntax pages per group, extrapolated constructs flagged, planned items stubbed honestly
-- [x] 3.8 De-brand + rebrand pass: no Bend1/old-HVM/study-notes anywhere in dist, Bend Documentation identity, LYAH chapters ToC, Lean mirror-proof section
-- [x] 3.9 Square professional theme (zero border-radius) + sticky right-side section nav with build-extracted anchors, all links verified resolving
-- [x] 3.10 OCaml-style IV pages (prerequisites boxes, Lean goal transcript, remarks) + drop VI section (chain via curriculum order), numbered parts
-- [x] 3.11 Rebuild contents as a professional documentation index: centered responsive reading layout, permanent desktop documentation rail, mobile contents disclosure, six numbered chapters, and all 45 curriculum items with resolving URLs
-- [x] 3.12 Remove Python tooling from the repository; replace research fetch utility with Node ESM and verify no `*.py` files remain
 - [x] 2.2 Generate per-page Markdown mirrors, llms.txt, sitemap, robots, and verify mirrors match HTML content and llms.txt lists them
 
 ## 3. Astro site scaffold
@@ -28,6 +23,11 @@
 - [x] 3.5 Wider template (42rem → 52rem container) + code-block refinements, verify + redeploy
 - [x] 3.6 Spacing sweep (missing blanks after colons/links on all pages) + callout-box/color system in template, verified in build
 - [x] 3.7 LYAH-style pass: global CSS fix (is:global — prior styling never applied), LYAH palette/structure, prev/next footers, chapters list, label chips, 3 new diagrams
+- [x] 3.8 De-brand + rebrand pass: no Bend1/old-HVM/study-notes anywhere in dist, Bend Documentation identity, LYAH chapters ToC, Lean mirror-proof section
+- [x] 3.9 Square professional theme (zero border-radius) + sticky right-side section nav with build-extracted anchors, all links verified resolving
+- [x] 3.10 OCaml-style IV pages (prerequisites boxes, Lean goal transcript, remarks) + drop VI section (chain via curriculum order), numbered parts
+- [x] 3.11 Rebuild contents as a professional documentation index: centered responsive reading layout, permanent desktop documentation rail, mobile contents disclosure, six numbered chapters, and all 45 curriculum items with resolving URLs
+- [x] 3.12 Remove Python tooling from the repository; replace research fetch utility with Node ESM and verify no `*.py` files remain
 
 ## 4. Alchemy deploy (blocked on user credentials)
 
