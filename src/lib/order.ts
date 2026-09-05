@@ -20,7 +20,7 @@ export const PARTS: Part[] = [
   },
   {
     no: "II", title: "The machine",
-    blurb: "Four runtime generations plus the calculus they implement — including code you can run tonight.",
+    blurb: "The current runtime plus the calculus it implements — including code you can run tonight.",
     slugs: ["/notes/hvm-runtime/", "/learn/hvm-hands-on/"],
   },
   {
