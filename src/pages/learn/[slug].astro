@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { neighbors } from "../../lib/order";
+import ids from "../../lib/heading-ids.json";
 
 export async function getStaticPaths() {
   const learn = await getCollection("learn");
@@ -37,6 +38,7 @@ const titles = new Map<string, string>([
   ] as const),
 ]);
 const nav = neighbors(entry.data.canonical, titles);
+const toc = (ids as Record<string, { id: string; text: string; depth: number }[]>)[entry.data.canonical] ?? [];
 ---
 
 <Base
@@ -44,6 +46,7 @@ const nav = neighbors(entry.data.canonical, titles);
   description={entry.data.description}
   canonical={entry.data.canonical}
   mdMirror={mirror}
+  toc={toc}
 >
   <p class="badge" style={badge}>status: {entry.data.status}</p>
   <Content />

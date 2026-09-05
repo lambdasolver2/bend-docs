@@ -4,8 +4,9 @@ interface Props {
   description: string;
   canonical: string;
   mdMirror?: string;
+  toc?: { id: string; text: string; depth: number }[];
 }
-const { title, description, canonical, mdMirror } = Astro.props;
+const { title, description, canonical, mdMirror, toc } = Astro.props;
 const site = "https://bend-docs.example.com";
 const url = new URL(canonical, site).href;
 ---
@@ -113,9 +114,9 @@ const url = new URL(canonical, site).href;
         line-height: 1.65;
         -webkit-font-smoothing: antialiased;
       }
-      main, footer { max-width: min(800px, 92vw); margin-inline: auto; }
+      main, footer { max-width: min(1060px, 94vw); margin-inline: auto; }
       main { padding-block: 1.5rem 2rem; }
-      .running-head { max-width: min(800px, 92vw); margin-inline: auto; padding-top: 0.5rem; }
+      .running-head { max-width: min(1060px, 94vw); margin-inline: auto; padding-top: 0.5rem; }
       .rh-inner {
         border-bottom: 1px solid var(--ink);
         display: flex; justify-content: space-between; align-items: baseline;
@@ -142,12 +143,12 @@ const url = new URL(canonical, site).href;
       code, pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.9em; }
       code:not(pre code) {
         background: color-mix(in srgb, var(--muted) 14%, var(--paper));
-        border-radius: 4px;
+        border-radius: 0;
         padding: 0.1em 0.35em;
       }
       pre.astro-code {
         position: relative;
-        border-radius: 12px;
+        border-radius: 0;
         border: 1px solid color-mix(in srgb, var(--muted) 40%, transparent);
         padding: 1.1rem 1.25rem;
         margin: 1.5em 0;
@@ -167,14 +168,14 @@ const url = new URL(canonical, site).href;
       table { border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; display: block; overflow-x: auto; }
       th, td { text-align: left; vertical-align: top; padding: 0.4rem 1.1rem 0.4rem 0; }
       thead th { border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--ink); }
-      .badge { display: inline-block; font-size: 0.8rem; border-radius: 20px; padding: 0.15rem 0.7rem; color: #fff; background: var(--accent); margin-bottom: 1rem; }
-      .box { border-radius: 10px; padding: 0.9rem 1.1rem; margin: 1.25em 0; border: 1px solid var(--rule); }
+      .badge { display: inline-block; font-size: 0.8rem; border-radius: 0; padding: 0.15rem 0.7rem; color: #fff; background: var(--accent); margin-bottom: 1rem; }
+      .box { border-radius: 0; padding: 0.9rem 1.1rem; margin: 1.25em 0; border: 1px solid var(--rule); }
       .box p:first-child { margin-top: 0; }
       .box p:last-child { margin-bottom: 0; }
       .box-key { border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--paper)); }
       .box-warn { border-left: 4px solid #b3541e; background: color-mix(in srgb, #b3541e 10%, var(--paper)); }
       .box-info { border-left: 4px solid var(--muted); background: color-mix(in srgb, #b59a00 14%, var(--paper)); }
-      .label { white-space: nowrap; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; padding: 0.1em 0.4em; border-radius: 4px; }
+      .label { white-space: nowrap; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; padding: 0.1em 0.4em; border-radius: 0; }
       .label-fn { background: #c00; color: #fff; }
       .label-ty { background: #519179; color: #fff; }
       .label-cl { background: #c3c; color: #fff; }
@@ -195,6 +196,20 @@ const url = new URL(canonical, site).href;
       .prevlink::before { content: "← "; }
       .nxtlink::after { content: " →"; }
       .meta { color: var(--muted); font-size: 0.85rem; }
+      .doc-layout { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 2.5rem; align-items: start; }
+      .doc-main { min-width: 0; max-width: 46rem; }
+      aside.toc { position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; font-size: 0.85rem; border-left: 1px solid var(--rule); padding-left: 1rem; }
+      aside.toc p { font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 0.5rem; color: var(--muted); }
+      aside.toc ul { list-style: none; margin: 0; padding: 0; }
+      aside.toc li { margin: 0.3rem 0; line-height: 1.4; }
+      aside.toc li.sub { padding-left: 0.9rem; }
+      aside.toc a { color: var(--muted); text-decoration: none; }
+      aside.toc a:hover { color: var(--link-hover); }
+      @media (max-width: 1024px) {
+        .doc-layout { display: block; }
+        .doc-main { max-width: none; }
+        aside.toc { display: none; }
+      }
       figure { margin: 1.75rem 0; }
       figure svg { max-width: 100%; height: auto; display: block; }
       figcaption { color: var(--muted); margin-top: 0.4rem; font-size: 0.85rem; }
@@ -219,7 +234,23 @@ const url = new URL(canonical, site).href;
       </div>
     </header>
     <main>
-      <slot />
+      <div class="doc-layout">
+        <div class="doc-main">
+          <slot />
+        </div>
+        {toc && toc.length > 0 && (
+          <aside class="toc" aria-label="On this page">
+            <p>On this page</p>
+            <ul>
+              {toc.map((h) => (
+                <li class={h.depth === 3 ? "sub" : undefined}>
+                  <a href={`#${h.id}`}>{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+      </div>
     </main>
     <footer>
       <p>Unofficial Bend documentation. Not affiliated with Higher Order Company.</p>

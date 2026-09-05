@@ -1,0 +1,414 @@
+{
+  "/learn/data-matching/": [
+    {
+      "id": "algebraic-data-types-and-pattern-matching",
+      "text": "Algebraic data types and pattern matching",
+      "depth": 2
+    },
+    {
+      "id": "records-and-maps",
+      "text": "Records and maps",
+      "depth": 2
+    },
+    {
+      "id": "recursion-higher-order-functions-closures-folds",
+      "text": "Recursion, higher-order functions, closures, folds",
+      "depth": 2
+    }
+  ],
+  "/learn/effects-targets/": [
+    {
+      "id": "io-and-files",
+      "text": "IO and files",
+      "depth": 2
+    },
+    {
+      "id": "compiling-to-c-javascript-python",
+      "text": "Compiling to C, JavaScript, Python",
+      "depth": 2
+    }
+  ],
+  "/learn/first-programs/": [
+    {
+      "id": "functions",
+      "text": "Functions",
+      "depth": 2
+    },
+    {
+      "id": "let-bindings",
+      "text": "Let bindings",
+      "depth": 2
+    },
+    {
+      "id": "conditionals-and-booleans",
+      "text": "Conditionals and booleans",
+      "depth": 2
+    },
+    {
+      "id": "numbers-strings-tuples",
+      "text": "Numbers, strings, tuples",
+      "depth": 2
+    },
+    {
+      "id": "lists-and-imports",
+      "text": "Lists and imports",
+      "depth": 2
+    }
+  ],
+  "/learn/gpu/": [
+    {
+      "id": "what-the-mark-does",
+      "text": "What the mark does",
+      "depth": 2
+    },
+    {
+      "id": "what-stays-on-the-cpu",
+      "text": "What stays on the CPU",
+      "depth": 2
+    },
+    {
+      "id": "the-backends",
+      "text": "The backends",
+      "depth": 2
+    }
+  ],
+  "/learn/hello/": [
+    {
+      "id": "line-by-line",
+      "text": "Line by line",
+      "depth": 2
+    },
+    {
+      "id": "where-effects-run",
+      "text": "Where effects run",
+      "depth": 2
+    }
+  ],
+  "/learn/hvm-hands-on/": [
+    {
+      "id": "first-run-a-function-of-two-arguments",
+      "text": "First run: a function of two arguments",
+      "depth": 2
+    },
+    {
+      "id": "superposition-one-location-two-values",
+      "text": "Superposition: one location, two values",
+      "depth": 2
+    },
+    {
+      "id": "labels-decide-annihilate-or-multiply",
+      "text": "Labels decide: annihilate or multiply",
+      "depth": 2
+    },
+    {
+      "id": "affinity-the-compiler-that-says-no-twice",
+      "text": "Affinity: the compiler that says no twice",
+      "depth": 2
+    },
+    {
+      "id": "fib-with-a-stopwatch",
+      "text": "Fib, with a stopwatch",
+      "depth": 2
+    },
+    {
+      "id": "pattern-matching-that-actually-parses",
+      "text": "Pattern matching that actually parses",
+      "depth": 2
+    }
+  ],
+  "/learn/parallelism/": [
+    {
+      "id": "the-fork",
+      "text": "The fork",
+      "depth": 2
+    },
+    {
+      "id": "the-match",
+      "text": "The match",
+      "depth": 2
+    },
+    {
+      "id": "what-it-computes",
+      "text": "What it computes",
+      "depth": 2
+    }
+  ],
+  "/learn/proofs/": [
+    {
+      "id": "the-statement",
+      "text": "The statement",
+      "depth": 2
+    },
+    {
+      "id": "the-proof",
+      "text": "The proof",
+      "depth": 2
+    },
+    {
+      "id": "following-the-goals",
+      "text": "Following the goals",
+      "depth": 2
+    },
+    {
+      "id": "next-to-lean",
+      "text": "Next to Lean",
+      "depth": 2
+    }
+  ],
+  "/learn/sharing/": [
+    {
+      "id": "sharing-and-duplication",
+      "text": "Sharing and duplication",
+      "depth": 2
+    },
+    {
+      "id": "unscoped-lambdas-and-superpositions",
+      "text": "Unscoped lambdas and superpositions",
+      "depth": 2
+    },
+    {
+      "id": "evaluation-order-and-measuring-speedup",
+      "text": "Evaluation order and measuring speedup",
+      "depth": 2
+    }
+  ],
+  "/learn/synthesis/": [
+    {
+      "id": "holes",
+      "text": "Holes",
+      "depth": 2
+    },
+    {
+      "id": "types-as-specifications",
+      "text": "Types as specifications",
+      "depth": 2
+    },
+    {
+      "id": "supgen",
+      "text": "SupGen",
+      "depth": 2
+    }
+  ],
+  "/learn/types-proofs/": [
+    {
+      "id": "type-annotations-and-polymorphism",
+      "text": "Type annotations and polymorphism",
+      "depth": 2
+    },
+    {
+      "id": "dependent-types-first-contact",
+      "text": "Dependent types, first contact",
+      "depth": 2
+    },
+    {
+      "id": "induction-and-totality",
+      "text": "Induction and totality",
+      "depth": 2
+    }
+  ],
+  "/notes/four-interactions/": [
+    {
+      "id": "why-lazy-needs-two-new-forms",
+      "text": "Why lazy needs two new forms",
+      "depth": 2
+    },
+    {
+      "id": "the-four-rules",
+      "text": "The four rules",
+      "depth": 2
+    },
+    {
+      "id": "optimal-sharing-on-paper",
+      "text": "Optimal sharing, on paper",
+      "depth": 2
+    },
+    {
+      "id": "church-2-in-14-interactions",
+      "text": "Church 2² in 14 interactions",
+      "depth": 2
+    },
+    {
+      "id": "collapse-reading-the-answer-out",
+      "text": "Collapse: reading the answer out",
+      "depth": 2
+    },
+    {
+      "id": "one-word-per-term",
+      "text": "One word per term",
+      "depth": 2
+    }
+  ],
+  "/notes/hvm-runtime/": [
+    {
+      "id": "the-calculus-underneath",
+      "text": "The calculus underneath",
+      "depth": 2
+    },
+    {
+      "id": "metal-and-cuda-backends",
+      "text": "Metal and CUDA backends",
+      "depth": 2
+    },
+    {
+      "id": "what-the-aot-compiler-changes",
+      "text": "What the AOT compiler changes",
+      "depth": 2
+    }
+  ],
+  "/notes/interaction-nets/": [
+    {
+      "id": "why-they-are-so-great-the-benefits-up-front",
+      "text": "Why they are so great: the benefits up front",
+      "depth": 2
+    },
+    {
+      "id": "how-copying-works-the-shared-graph",
+      "text": "How copying works: the shared graph",
+      "depth": 2
+    },
+    {
+      "id": "the-model-in-one-minute",
+      "text": "The model in one minute",
+      "depth": 2
+    },
+    {
+      "id": "the-two-theorems-that-carry-everything",
+      "text": "The two theorems that carry everything",
+      "depth": 2
+    },
+    {
+      "id": "the-λ-calculus-with-fine-print",
+      "text": "The λ-calculus, with fine print",
+      "depth": 2
+    },
+    {
+      "id": "in-the-machine",
+      "text": "In the machine",
+      "depth": 2
+    }
+  ],
+  "/notes/optimal-computer/": [
+    {
+      "id": "1936-twice",
+      "text": "1936, twice",
+      "depth": 2
+    },
+    {
+      "id": "what-each-model-gets-wrong",
+      "text": "What each model gets wrong",
+      "depth": 2
+    },
+    {
+      "id": "annihilation-and-commutation",
+      "text": "Annihilation and commutation",
+      "depth": 2
+    }
+  ],
+  "/notes/proof-lineage/": [
+    {
+      "id": "formality-proofs-as-superpowers",
+      "text": "Formality: proofs as superpowers",
+      "depth": 2
+    },
+    {
+      "id": "kind-the-minimal-theory",
+      "text": "Kind: the minimal theory",
+      "depth": 2
+    },
+    {
+      "id": "what-this-predicts-about-bend2",
+      "text": "What this predicts about Bend2",
+      "depth": 2
+    }
+  ],
+  "/notes/release-status/": [
+    {
+      "id": "the-dated-trail",
+      "text": "The dated trail",
+      "depth": 2
+    },
+    {
+      "id": "what-released-will-mean-here",
+      "text": "What “released” will mean here",
+      "depth": 2
+    }
+  ],
+  "/notes/search-by-superposition/": [
+    {
+      "id": "truth-tables-for-free",
+      "text": "Truth tables for free",
+      "depth": 2
+    },
+    {
+      "id": "sat-3-minutes-in-rust-1-second-in-hvm",
+      "text": "SAT: 3 minutes in Rust, 1 second in HVM",
+      "depth": 2
+    },
+    {
+      "id": "program-search-65536-candidates-36k-interactions",
+      "text": "Program search: 65,536 candidates, 36k interactions",
+      "depth": 2
+    },
+    {
+      "id": "why-this-page-exists-in-bend2s-notes",
+      "text": "Why this page exists in Bend2’s notes",
+      "depth": 2
+    }
+  ],
+  "/notes/vs-lean/": [
+    {
+      "id": "lean-the-proof-is-the-product",
+      "text": "Lean: the proof is the product",
+      "depth": 2
+    },
+    {
+      "id": "bend2-the-program-is-the-product",
+      "text": "Bend2: the program is the product",
+      "depth": 2
+    },
+    {
+      "id": "the-same-theorem-in-lean-4",
+      "text": "The same theorem in Lean 4",
+      "depth": 2
+    },
+    {
+      "id": "the-default-today",
+      "text": "The default today",
+      "depth": 2
+    }
+  ],
+  "/notes/vs-mojo/": [
+    {
+      "id": "mojo-you-are-the-scheduler",
+      "text": "Mojo: you are the scheduler",
+      "depth": 2
+    },
+    {
+      "id": "bend2-the-evaluator-is-the-scheduler",
+      "text": "Bend2: the evaluator is the scheduler",
+      "depth": 2
+    },
+    {
+      "id": "where-each-wins",
+      "text": "Where each wins",
+      "depth": 2
+    }
+  ],
+  "/notes/what-is-bend2/": [
+    {
+      "id": "why-this-combination-matters",
+      "text": "Why this combination matters",
+      "depth": 2
+    },
+    {
+      "id": "what-the-language-looks-like",
+      "text": "What the language looks like",
+      "depth": 2
+    },
+    {
+      "id": "status-what-actually-exists",
+      "text": "Status: what actually exists",
+      "depth": 2
+    }
+  ]
+}
