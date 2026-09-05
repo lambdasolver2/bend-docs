@@ -32,6 +32,7 @@
 - [x] 3.14 Approved Lean-style 1–10 TOC: decimal section addresses, deferred superposition material, group-only right rail, restored rail scroll position, and code-copy controls
 - [x] 3.15 Independent per-rail scroll memory, dead markup removal, and one-address-per-curriculum-item splits
 - [x] 3.16 Professional voice pass: 960px effective column, beginner-first Types and Proofs chapter, process meta-text removed (status lives in badges)
+- [x] 3.17 Expert audit pass: correct Bend2/HVM code labels via aliases, single SITE source of truth, right rail derived from TOC (no drift), astro check clean
 
 ## 4. Alchemy deploy (blocked on user credentials)
 
