@@ -13,13 +13,33 @@ const REPRESENTATIVE: Record<string, string> = {
   "8": "/learn/effects-targets/",
 };
 
+// Page titles for paths that only appear as anchor targets in PARTS
+// (they have no bare-page item to take a title from).
+const PAGE_TITLES: Record<string, string> = {
+  "/notes/proof-lineage/": "Where the proofs come from",
+};
+
+// The rail lists pages, never subsection anchors: anchor items collapse
+// into their parent page (subsections live in the right "On this page"
+// rail). Keeps insertion order, prefers the bare-page item's title.
+function railItems(part: (typeof PARTS)[number]) {
+  const seen = new Map<string, string>();
+  for (const item of part.items) {
+    const path = item.href.split("#")[0];
+    if (!seen.has(path)) {
+      seen.set(path, item.href.includes("#") ? (PAGE_TITLES[path] ?? item.title) : item.title);
+    }
+  }
+  return [...seen].map(([href, title]) => ({ title, href }));
+}
+
 export const SITE_NAV = [
   {
     title: "Table of Contents",
     groups: PARTS.map((part) => ({
       title: `${part.no} ${part.title}`,
       items: FULL.has(part.no)
-        ? part.items.map((item) => ({ title: item.title, href: item.href }))
+        ? railItems(part)
         : [{ title: part.title, href: REPRESENTATIVE[part.no] }],
     })),
   },
