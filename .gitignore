@@ -6,5 +6,8 @@ dist/
 .env.*
 *.log
 .DS_Store
-.cache/
-book/
+/.cache/
+/book/
+
+# scratch
+scripts/book/_*.ts
