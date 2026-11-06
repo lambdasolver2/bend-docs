@@ -1,0 +1,42 @@
+---
+import Base from "../../layouts/Base.astro";
+import { COURSE_ORDER } from "../../lib/order";
+
+const chapters = [
+  { no: "00", title: "Course overview", blurb: "Map, prerequisites, versions, honest limits." },
+  { no: "01", title: "First programs in Bend 2", blurb: "Install, def, numbers, match, lists, imports." },
+  { no: "02", title: "Ownership and copying in Bend 2", blurb: "Affine binders, quantities, Data vs Type, Arrays, copy costs." },
+  { no: "03", title: "Interaction nets, from zero", blurb: "Cells, active pairs, confluence, combinators, beta." },
+  { no: "04", title: "Duplication, superposition, and labels", blurb: "The 4 rules, dup/sup, labels, search — and what Bend 2 does not have." },
+  { no: "05", title: "Parallelism and BendRT", blurb: "Fork shape, balanced trees, GPU bang, measuring, auditing C." },
+  { no: "06", title: "Dependent types in Bend 2", blurb: "Unit/Empty preconditions, Vec, GADT analogies." },
+  { no: "07", title: "Laws and proofs in Bend 2", blurb: "Equality, induction, rewrites, holes, LAWS/PROOF, Bend vs Lean." },
+  { no: "08", title: "Checker rules reference", blurb: "Order, termination, match, annotations, limits, error index." },
+];
+
+const slugs = COURSE_ORDER.map((href) => href.replace(/^\/course\//, "").replace(/\/$/, ""));
+---
+
+<Base
+  title="Bend2 course"
+  description="A beginner's course on Bend2 for functional programmers: language, interaction nets, copying, parallelism, and proofs, with exercises and solutions."
+  canonical="/course/"
+  mdMirror="/course/index.md"
+>
+  <h1>Bend2 course</h1>
+  <div class="box box-key">
+    <b>For functional programmers.</b> Assumes Haskell or OCaml. Every
+    chapter has exercises with worked solutions; every runnable snippet
+    was checked against the installed Bend compiler. Start at
+    <a href="/course/00-overview/">00 · overview</a>.
+  </div>
+  <ol class="curriculum-list">
+    {chapters.map((c, i) => (
+      <li>
+        <span class="curriculum-no">{c.no}</span>
+        <a href={`/course/${slugs[i]}/`}>{c.title}</a>
+        <span> — {c.blurb}</span>
+      </li>
+    ))}
+  </ol>
+</Base>

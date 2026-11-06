@@ -115,6 +115,14 @@ export const ADVANCED_ORDER = [
   "/learn/sharing/", "/notes/search-by-superposition/",
 ];
 
+export const COURSE_ORDER = [
+  "/course/00-overview/", "/course/01-first-programs/",
+  "/course/02-ownership-copy/", "/course/03-interaction-nets/",
+  "/course/04-dup-sup-labels/", "/course/05-parallel-runtime/",
+  "/course/06-dependent-types/", "/course/07-laws-proofs/",
+  "/course/08-checker-rules/",
+];
+
 export const ORDER = [
   "/", "/contents/",
   ...new Set(PARTS.flatMap((part) => part.items.map((item) => item.href.split("#")[0]))),

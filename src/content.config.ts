@@ -26,4 +26,9 @@ const learn = defineCollection({
   schema,
 });
 
-export const collections = { notes, learn };
+const course = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/course" }),
+  schema,
+});
+
+export const collections = { notes, learn, course };

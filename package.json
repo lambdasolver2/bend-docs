@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "book:build": "bun scripts/book/build.ts",
+    "book:dev": "bun scripts/book/dev.ts",
+    "book:pdf": "bun scripts/book/pdf.ts",
+    "book:check": "bun scripts/book/check.ts"
   },
   "dependencies": {
     "@effect/platform-bun": "^4.0.0-rc.112",
@@ -18,6 +22,9 @@
   "devDependencies": {
     "@alchemy.run/frontend-frameworks": "^2.0.0-beta.76",
     "@astrojs/check": "^0.9.10",
+    "entities": "6.0.1",
+    "marked": "18.0.11",
+    "playwright-core": "1.62.1",
     "typescript": "^5.6.0"
   }
 }
