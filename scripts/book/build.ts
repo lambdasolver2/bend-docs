@@ -231,16 +231,22 @@ function page(opts: {
 <body class="doc-${opts.kind}">
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
-  <a class="brand" href="index.html">Interaction nets <span>·</span> HVM4 <span>·</span> HVM5</a>
+  <a class="brand" href="index.html">Interaction nets<span class="long"> <span>·</span> HVM4 <span>·</span> HVM5</span></a>
   <nav class="tabs" aria-label="Documents">${tabs}</nav>
   <div class="tools">
-    <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc">Contents</button>
-    <input id="toc-filter" type="search" placeholder="filter contents" aria-label="Filter the table of contents">
+    <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc" aria-label="Open the table of contents">Contents</button>
     <button type="button" id="print-btn" title="Print or save as PDF">Print</button>
   </div>
 </header>
 <div class="layout">
-  <nav class="sidebar" aria-label="Table of contents"><div class="sidebar-inner" id="toc">${opts.toc}</div></nav>
+  <nav class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-head">
+      <input id="toc-filter" type="search" placeholder="filter contents" aria-label="Filter the table of contents">
+      <button type="button" class="toc-close" aria-label="Close the table of contents">✕</button>
+    </div>
+    <div class="sidebar-inner" id="toc">${opts.toc}</div>
+  </nav>
+  <div class="backdrop" hidden></div>
   <main class="content" id="main">
 ${opts.body}
   </main>

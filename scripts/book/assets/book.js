@@ -56,14 +56,26 @@
     const toggle = $(".toc-toggle");
     const sidebar = $(".sidebar");
     if (toggle && sidebar) {
-      toggle.addEventListener("click", () => {
-        const open = sidebar.classList.toggle("open");
+      const backdrop = $(".backdrop");
+      const close = $(".toc-close");
+      const setOpen = (open) => {
+        sidebar.classList.toggle("open", open);
+        document.body.classList.toggle("toc-open", open);
         toggle.setAttribute("aria-expanded", String(open));
+        if (backdrop) backdrop.hidden = !open;
+      };
+      toggle.addEventListener("click", () => setOpen(!sidebar.classList.contains("open")));
+      if (close) close.addEventListener("click", () => setOpen(false));
+      if (backdrop) backdrop.addEventListener("click", () => setOpen(false));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && sidebar.classList.contains("open")) setOpen(false);
       });
-      $$("a", sidebar).forEach((a) => a.addEventListener("click", () => {
-        sidebar.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      }));
+      // a focused <input type=search> consumes Escape in Chromium, so close from there too
+      const filterEl = $("#toc-filter");
+      if (filterEl) filterEl.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && sidebar.classList.contains("open")) setOpen(false);
+      });
+      $$("a", sidebar).forEach((a) => a.addEventListener("click", () => setOpen(false)));
     }
 
     const targets = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);

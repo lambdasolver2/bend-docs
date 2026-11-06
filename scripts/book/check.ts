@@ -108,6 +108,56 @@ for (const [doc, md] of [["coursebook", "bend-hvm-inet-coursebook-claude.md"], [
   await page.close();
 }
 
+// ------------------------------------------------------------ C7 mobile layout
+{
+  const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  const errors: string[] = [];
+  mobile.on("pageerror", (e) => errors.push(String(e)));
+  for (const doc of ["index", "coursebook", "compendium"]) {
+    await mobile.goto("file://" + path.join(BOOK, `${doc}.html`), { waitUntil: "load", timeout: 180000 });
+    await mobile.waitForTimeout(400);
+    const m = await mobile.evaluate(() => ({
+      over: document.documentElement.scrollWidth - window.innerWidth,
+      font: parseFloat(getComputedStyle(document.body).fontSize),
+      wide: [...document.querySelectorAll("body *")].filter((el) => {
+        const r = (el as HTMLElement).getBoundingClientRect();
+        if (r.width <= window.innerWidth + 1 || r.height <= 0) return false;
+        for (let n = el.parentElement; n; n = n.parentElement) if (getComputedStyle(n).overflowX !== "visible") return false;
+        return true;
+      }).length,
+    }));
+    ok(`C7 ${doc} fits a 390 px phone`, m.over <= 1 && m.wide === 0, `overflow ${m.over} px, ${m.wide} wide elements, body ${m.font} px`);
+  }
+  // the drawer: opens, filters, closes with Escape, and its links are big enough to tap
+  await mobile.goto("file://" + path.join(BOOK, "coursebook.html"), { waitUntil: "load", timeout: 180000 });
+  await mobile.waitForFunction("window.bookReady === true", null, { timeout: 180000 });
+  await mobile.locator(".toc-toggle").click();
+  await mobile.waitForTimeout(300);
+  const drawer = await mobile.evaluate(() => {
+    const nav = document.querySelector(".sidebar")!;
+    const link = document.querySelector(".toc-list a") as HTMLElement;
+    return { open: nav.classList.contains("open"), backdrop: !document.querySelector(".backdrop")!.hasAttribute("hidden"), tap: Math.round(link.getBoundingClientRect().height) };
+  });
+  await mobile.locator("#toc-filter").fill("3.5");
+  await mobile.waitForTimeout(200);
+  const shown = await mobile.locator(".toc-list > li:not(.hidden)").count();
+  await mobile.keyboard.press("Escape");
+  await mobile.waitForTimeout(300);
+  const shut = await mobile.evaluate(() => !document.querySelector(".sidebar")!.classList.contains("open"));
+  ok("C7 phone drawer", drawer.open && drawer.backdrop && drawer.tap >= 36 && shown >= 1 && shut,
+    `open ${drawer.open}, backdrop ${drawer.backdrop}, tap ${drawer.tap} px, ${shown} match after filter, closed by Escape ${shut}`);
+  // a wide table scrolls inside its own box instead of squeezing columns
+  await mobile.goto("file://" + path.join(BOOK, "coursebook.html"), { waitUntil: "load", timeout: 180000 });
+  await mobile.waitForFunction("window.bookReady === true", null, { timeout: 180000 });
+  const t = await mobile.evaluate(() => {
+    const w = document.querySelector(".table-wrap") as HTMLElement;
+    return { scrolls: w.scrollWidth > w.clientWidth, cols: getComputedStyle(w.querySelector("table")!).width };
+  });
+  ok("C7 phone tables scroll", t.scrolls, `table ${t.cols}, wrapper scrolls ${t.scrolls}`);
+  ok("C7 mobile console", errors.length === 0, `${errors.length} errors ${errors.slice(0, 2).join(" | ")}`);
+  await mobile.close();
+}
+
 await browser.close();
 console.log(failures ? `\n${failures} check(s) failed` : "\nall checks passed");
 process.exit(failures ? 1 : 0);
