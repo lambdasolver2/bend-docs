@@ -230,8 +230,26 @@
 
     const termAt = (i) => terms[Math.min(i, terms.length - 1)] || "";
     const scene = (cells, wires, caption) => ({ width: F.width, height: F.height, cells, free: F.frames[0].free, wires, caption });
-    const captionOf = (i) => (i === 0 ? "step 0 · start" : `step ${i} · ${F.frames[i].event.rule.name}`) +
-      (i === last ? (F.frames[i].counts.active ? " · step limit" : " · normal form") : "");
+    // the caption is drawn inside the canvas, so it must fit the canvas: estimate the
+    // mono advance and cut with an ellipsis rather than letting it run off the edge
+    const room = Math.max(12, Math.floor((F.width - 16) / 5.9));
+    const fit = (text) => (text.length <= room ? text : text.slice(0, room - 1) + "…");
+    // join caption parts while they fit, so a narrow canvas drops "· normal form"
+    // instead of cutting the rule name in half
+    const compose = (...parts) => {
+      let out = "";
+      for (const part of parts) {
+        if (!part) continue;
+        const next = out ? `${out} · ${part}` : part;
+        if (next.length > room) break;
+        out = next;
+      }
+      return out || fit(parts[0]);
+    };
+    const captionOf = (i) => compose(
+      `step ${i}`,
+      i === 0 ? "start" : F.frames[i].event.rule.name,
+      i === last ? (F.frames[i].counts.active ? "step limit" : "normal form") : "");
 
     /* ------------------------------------------------ one frame, no motion */
     const draw = (i) => {
@@ -337,7 +355,7 @@
           if (b) { const dx = b.x - pts[n - 1].x, dy = b.y - pts[n - 1].y; pts.forEach((p, ix) => { const k2 = Math.pow(ix / (n - 1), 2); p.x += dx * k2; p.y += dy * k2; }); }
           return { p: w.p, q: w.q, cls: w.cls, pts, fade: w.fade ? 1 - t : 1 };
         });
-        stage.innerHTML = Inet.renderScene({ width: F.width, height: F.height, cells, free: B.free, wires: drawn, caption: `step ${i + 1} · ${ev.rule.name}` }, { fluid: true });
+        stage.innerHTML = Inet.renderScene({ width: F.width, height: F.height, cells, free: B.free, wires: drawn, caption: compose(`step ${i + 1}`, ev.rule.name) }, { fluid: true });
         if (raw < 1) raf = requestAnimationFrame(frame);
         else { draw(i + 1); if (done) done(); }
       };
